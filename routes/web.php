@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\RegisterController as AdminRegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ Route::post('register', [AdminRegisterController::class, 'register']);
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resources(['dashboard' => DashboardController::class]);
     Route::resources(['category' => CategoryController::class]);
+    Route::resources(['supplier'=>SupplierController::class]);
 });
 
 Route::resources(['home' => HomeController::class]);
