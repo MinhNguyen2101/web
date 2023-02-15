@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('image');
             $table->string('category_id');
             $table->string('supplier_id');
-            $table->integer('price_old');
+            $table->integer('price_old')->nullable();
             $table->integer('price_new');
             $table->integer('quantity');
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

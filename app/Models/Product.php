@@ -18,10 +18,29 @@ class Product extends Model
         'quantity',
         'description',
         'supplier_id',
+        'status'
     ];
 
     protected $cast = [
         'created_at' => 'd/m/yyyy',
         'updated_at' => 'd/m/yyyy',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(
+            Category::class,
+            'category_id',
+            'id'
+        );
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(
+            Supplier::class,
+            'supplier_id',
+            'id'
+        );
+    }
 }
