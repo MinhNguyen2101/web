@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\Usercontroller;
 use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resources(['supplier' => SupplierController::class]);
     Route::resources(['product' => ProductController::class]);
     Route::get('/changeStatus', [ProductController::class, 'changeStatus'])->name('changeStatus');
+    Route::resources(['user' => Usercontroller::class]);
 });
 
 Route::resources(['home' => HomeController::class]);
