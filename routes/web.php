@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\RegisterController as AdminRegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\Usercontroller;
@@ -40,6 +41,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resources(['product' => ProductController::class]);
     Route::get('/changeStatus', [ProductController::class, 'changeStatus'])->name('changeStatus');
     Route::resources(['user' => Usercontroller::class]);
+    Route::resources(['order' => OrderController::class]);
 });
 
 Route::resources(['home' => HomeController::class]);

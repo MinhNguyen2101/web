@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,6 +17,9 @@ class OrderController extends Controller
     public function index()
     {
         //
+        $orders = Order::orderBy('id', 'desc')->paginate(8);
+
+        return view('admin.order.index', compact('orders'));
     }
 
     /**
@@ -47,6 +52,10 @@ class OrderController extends Controller
     public function show($id)
     {
         //
+        $order_details = OrderDetail::where('order_id', $id)->get();
+        $order = Order::find($id);
+
+        return view('admin.order.show', compact('order', 'order_details'));
     }
 
     /**

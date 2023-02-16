@@ -63,9 +63,9 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="card">
+                {{-- <div class="card"> --}}
                     @yield('contents')
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </main>
