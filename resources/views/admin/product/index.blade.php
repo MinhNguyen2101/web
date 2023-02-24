@@ -146,7 +146,6 @@
                                     {{ $product->category->name }}
                                 </td>
                                 <td>
-
                                     <label class="switch">
                                         <input data-id="{{ $product->id }}" class="toggle-class" type="checkbox"
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
@@ -155,7 +154,6 @@
                                             {{ $product->status == 1 ? 'checked' : '' }}>
                                         <span class="slider round"></span>
                                     </label>
-
                                 </td>
                                 <td class="align-middle text-center">
                                     <span

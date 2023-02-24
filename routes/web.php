@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\Usercontroller;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\HomepageController;
+use App\Http\Controllers\User\ProductController as UserProductController;
+use App\Http\Controllers\User\ProfileController;
+use App\Models\CartProduct;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,9 +46,29 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/changeStatus', [ProductController::class, 'changeStatus'])->name('changeStatus');
     Route::resources(['user' => Usercontroller::class]);
     Route::resources(['order' => OrderController::class]);
+    Route::get('changeStatusOrder', [OrderController::class, 'changeStatus'])->name('changeStatusOrder');
+    Route::get('order-process', [OrderController::class, 'orderProcess'])->name('order-process');
+    Route::get('order-success', [OrderController::class, 'orderSuccess'])->name('order-success');
+    Route::get('order-cancel', [OrderController::class, 'orderCancel'])->name('order-cancel');
 });
 
-Route::resources(['home' => HomeController::class]);
-Route::get('admin2', function () {
-    return view('admin.layouts.app');
-});
+// Route::resources(['home' => HomeController::class]);
+// Route::get('admin2', function () {
+//     return view('user.homepage');
+// });
+
+Route::get('homepage', [HomepageController::class, 'index'])->name('trang-chu');
+Route::resources(['product' => UserProductController::class]);
+Route::get('/cart', [UserProductController::class, 'cartProduct'])->name('cartProduct');
+Route::post('/addtocard', [UserProductController::class, 'addToCard'])->name('add-to-card');
+Route::post('/updateQuantity', [UserProductController::class, 'updateQuantityCart'])->name('update-quantity');
+Route::post('/deleteProduct', [UserProductController::class, 'deleteProduct'])->name('deleteProduct');
+Route::resources(['profile' => ProfileController::class]);
+Route::get('order_history', [ProfileController::class, 'orderHistory'])->name('order-history');
+Route::get('change-pass', [ProfileController::class, 'showChangePass'])->name('showChangePass');
+Route::post('change-pass', [ProfileController::class, 'changePass'])->name('change-pass');
+Route::get('checkout', [ProfileController::class, 'checkout'])->name('checkout');
+Route::post('check-out', [UserProductController::class, 'orderCheckout'])->name('order');
+// Route::get('product', function () {
+//     return view('user.product');
+// });

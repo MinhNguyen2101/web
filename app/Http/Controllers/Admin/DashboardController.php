@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,7 +19,28 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        return view('admin.dasboard');
+        $total_user = User::count();
+        $total_order_new = Order::where('status', 1)->count();
+        $total_order_process = Order::where('status', 2)->count();
+        $total_order_success = Order::where('status', 3)->count();
+        $total_order_cancel = Order::where('status', 4)->count();
+        $total_product = Product::count();
+        $total_money = Order::where('status', 3)->sum('total_price');
+        $total_category = Category::count();
+
+        return view(
+            'admin.dasboard',
+            compact(
+                'total_user',
+                'total_order_new',
+                'total_order_process',
+                'total_order_success',
+                'total_order_cancel',
+                'total_product',
+                'total_money',
+                'total_category',
+            )
+        );
     }
 
     /**

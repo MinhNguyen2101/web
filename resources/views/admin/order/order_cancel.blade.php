@@ -65,7 +65,7 @@
     </style>
     <div style="padding:15px">
         <div style="display: flex">
-            <h1 style="flex: 1">Đơn hàng mới </h1>
+            <h1 style="flex: 1">Đơn hàng bị hủy</h1>
             {{-- <button type="button" class="btn bg-gradient-success btn_create_order" data-bs-toggle="modal"
                 data-bs-target="#modal-create">Create</button> --}}
         </div>
@@ -87,9 +87,7 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
                                 Status</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                                style="width: 100px">
-                                Đã xử lý</th>
+
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Created at</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -130,16 +128,7 @@
                                         <span class="badge bg-gradient-danger">Đơn hàng bị hủy</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <label class="switch">
-                                        <input data-id="{{ $order->id }}" class="toggle-class" type="checkbox"
-                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                            data-on="Active" data-off="InActive"
-                                            data-url="{{ route('admin.changeStatusOrder') }}"
-                                            {{ $order->status == 2 ? 'checked' : '' }}>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </td>
+
                                 <td class="align-middle text-center">
                                     <span class="text-secondary text-xs font-weight-normal">{{ $order->created_at }}</span>
                                 </td>
@@ -171,27 +160,4 @@
             </div>
         </div>
     </div>
-    @push('page_script')
-        <script>
-            $(function() {
-                $('.toggle-class').change(function() {
-                    var status = $(this).prop('checked') == true ? 2 : 1;
-                    var order_id = $(this).data('id');
-                    let url = $(this).data('url');
-                    $.ajax({
-                        type: "GET",
-                        dataType: "json",
-                        url: `${url}`,
-                        data: {
-                            'status': status,
-                            'order_id': order_id
-                        },
-                        success: function(data) {
-                            window.location.href = "{{ route('admin.order.index') }}";
-                        }
-                    });
-                })
-            });
-        </script>
-    @endpush
 @endsection

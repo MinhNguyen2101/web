@@ -83,7 +83,7 @@ class LoginController extends Controller
                 $home = route('admin.dashboard.index');
                 break;
             default:
-                $home = route('home.index');
+                $home = route('trang-chu');
         }
 
         return redirect($home)->with('message', 'Dang nhap thanh cong');

@@ -65,7 +65,7 @@
     </style>
     <div style="padding:15px">
         <div style="display: flex">
-            <h1 style="flex: 1">Đơn hàng mới </h1>
+            <h1 style="flex: 1">Đơn hàng đang được xử lý </h1>
             {{-- <button type="button" class="btn bg-gradient-success btn_create_order" data-bs-toggle="modal"
                 data-bs-target="#modal-create">Create</button> --}}
         </div>
@@ -89,7 +89,7 @@
                                 Status</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
-                                Đã xử lý</th>
+                                Giao thành công</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Created at</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -136,7 +136,7 @@
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                             data-on="Active" data-off="InActive"
                                             data-url="{{ route('admin.changeStatusOrder') }}"
-                                            {{ $order->status == 2 ? 'checked' : '' }}>
+                                            {{ $order->status == 3 ? 'checked' : '' }}>
                                         <span class="slider round"></span>
                                     </label>
                                 </td>
@@ -175,7 +175,7 @@
         <script>
             $(function() {
                 $('.toggle-class').change(function() {
-                    var status = $(this).prop('checked') == true ? 2 : 1;
+                    var status = $(this).prop('checked') == true ? 3 : 2;
                     var order_id = $(this).data('id');
                     let url = $(this).data('url');
                     $.ajax({

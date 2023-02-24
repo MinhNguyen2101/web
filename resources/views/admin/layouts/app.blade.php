@@ -51,6 +51,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"
+        integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
@@ -64,7 +69,7 @@
         <div class="container-fluid py-4">
             <div class="row">
                 {{-- <div class="card"> --}}
-                    @yield('contents')
+                @yield('contents')
                 {{-- </div> --}}
             </div>
         </div>
