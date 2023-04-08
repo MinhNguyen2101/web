@@ -325,7 +325,10 @@
                         <div class="total-price">{{ number_format($item->product->price_new) }}
                         </div>
 
-                        <div class="total-price">
+                        <div class="total-price">Size:{{ ($item->size) }}
+                        </div>
+
+                        <div class="total-price" style="color: #ff9897,">
                             {{ number_format($item->product->price_new * $item->quantity) }}
                         </div>
                         <form action="{{ route('update-quantity') }}" method="POST" style="display: flex">

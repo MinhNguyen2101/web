@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CartProduct;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Province;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -97,7 +98,18 @@ class ProfileController extends Controller
     {
         $productCarts = CartProduct::where('user_id', auth()->user()->id)->get();
 
-        return view('user.check_out', compact('productCarts'));
+        $province = Province::all();
+
+
+        return view('user.check_out', compact('productCarts', 'province'));
+    }
+
+    public function loadQuan(Request $request)
+    {
+    }
+
+    public function loadXa(Request $request)
+    {
     }
 
     /**

@@ -389,7 +389,11 @@
                                     <a href=""><span>Trang chủ</span></a>
                                     <span class="mr_lr">&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
                                 </li>
-                                <li><strong><span> Tất cả sản phẩm</span></strong></li>
+                                @if (empty($name_search))
+                                    <li><strong><span> Tất cả sản phẩm</span></strong></li>
+                                @else
+                                    <li><strong><span> Kết quả cho tìm kiếm: {{ $name_search }}</span></strong></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -401,8 +405,8 @@
         <div class="container">
             <div class="row">
                 <div class="bg_collection">
-                    <aside class="dqdt-sidebar sidebar left-content col-lg-3 col-lg-3-fix">
-                        <aside class="aside-item sidebar-category collection-category dmsp">
+                    {{-- <aside class="dqdt-sidebar sidebar left-content col-lg-3 col-lg-3-fix"> --}}
+                    {{-- <aside class="aside-item sidebar-category collection-category dmsp">
                             <div class="aside-filter">
                                 <aside class="aside-item filter-vendor">
                                     <div class="aside-title">
@@ -411,8 +415,8 @@
                                         </h2>
                                     </div>
                                     <div class="aside-content filter-group">
-                                        <ul>
-                                            {{-- @if (count($suppliers) > 0)
+                                        <ul> --}}
+                    {{-- @if (count($suppliers) > 0)
                                                 @foreach ($suppliers as $item)
                                                     <li class="filter-item filter-item--check-box filter-item--green ">
                                                         <span>
@@ -426,12 +430,12 @@
                                                     </li>
                                                 @endforeach
                                             @endif --}}
-                                        </ul>
+                    {{-- </ul>
                                     </div>
                                 </aside>
                             </div>
-                        </aside>
-                        <aside class="aside-item filter-price">
+                        </aside> --}}
+                    {{-- <aside class="aside-item filter-price">
                             <div class="aside-title">
                                 <h2 class="title-head margin-top-0"><span>Khoảng giá</span></h2>
                             </div>
@@ -499,16 +503,67 @@
                                     </li>
                                 </ul>
                             </div>
-                        </aside>
-                    </aside>
+                        </aside> --}}
+                    {{-- </aside> --}}
 
-                    <div class="main_container collection col-lg-9 col-lg-9-fix padding-col-left-0">
+                    <div class="main_container collection col-lg-12 col-lg-12-fix padding-col-left-0">
                         <div class="category-products products">
                             <div class="sortPagiBar">
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 no-padding-right-992">
-                                        <div class="box-heading relative">
-                                            <h1 class="title-head margin-top-0">Tất cả sản phẩm</h1>
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-12 no-padding-right-992">
+                                        <div class="box-heading relative" style="display: flex">
+                                            @if (empty($name_search))
+                                                <span>
+                                                    <h1 class="title-head margin-top-0">Tất cả sản phẩm</h1>
+                                                </span>
+                                                <span style="margin-left:886px">
+                                                    <div class="input-group mb-3">
+                                                        {{-- <strong style="margin-right: 10px">
+                                                                    <div style="margin-top: 7px">Sắp xếp</div>
+                                                                </strong> --}}
+                                                        <form action="{{ route('route-index') }}" method="post">
+                                                            @csrf
+                                                            <select class="custom-select" id="inputGroupSelect01"
+                                                                class="form-control" style="width: 180px"
+                                                                name="sort">
+                                                                <option selected>Sắp xếp</option>
+                                                                <option value="price_asc">Giá tăng dần</option>
+                                                                <option value="price_desc">Giá giảm dần</option>
+                                                                <option value="name_asc">Tên A-Z</option>
+                                                                <option value="name_desc">Tên Z-A</option>
+                                                            </select>
+                                                            <button type="submit">Sap xep</button>
+                                                        </form>
+                                                    </div>
+                                                </span>
+                                            @else
+                                                <h3 style="margin-top: 13px"> Kết quả cho tìm kiếm: {{ $name_search }}
+                                                </h3>
+                                                <span style="margin-left:820px">
+                                                    <div class="input-group mb-3">
+                                                        {{-- <strong style="margin-right: 10px">
+                                                                    <div style="margin-top: 7px">Sắp xếp</div>
+                                                                </strong> --}}
+                                                        <form action="{{ route('search-product') }}" method="post">
+                                                            @csrf
+                                                            @if (!empty($name_search))
+                                                                <input type="hidden" name="search"
+                                                                    value="{{ $name_search }}">
+                                                            @endif
+                                                            <select class="custom-select" id="inputGroupSelect01"
+                                                                class="form-control" style="width: 190px"
+                                                                name="sort">
+                                                                <option selected>Sắp xếp</option>
+                                                                <option value="price_asc">Giá tăng dần</option>
+                                                                <option value="price_desc">Giá giảm dần</option>
+                                                                <option value="name_asc">Tên A-Z</option>
+                                                                <option value="name_desc">Tên Z-A</option>
+                                                            </select>
+                                                            <button type="submit">Sap xep</button>
+                                                        </form>
+                                                    </div>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -516,7 +571,7 @@
 
                             <div class="row">
                                 @foreach ($products as $item)
-                                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                                         <div class="product_border">
                                             <div class="product-box-h">
                                                 <div class="product-thumbnail">
@@ -586,8 +641,7 @@
                                                         </div>
                                                         @if ($item->price_old)
                                                             @if (empty(Auth::user()->id))
-                                                                <div class="product-price-btn"
-                                                                    style="margin-top: 25px">
+                                                                <div class="product-price-btn" style="margin-top: 25px">
                                                                     <a class="button" data-id="{{ $item->id }}">
                                                                         <button type="" onclick="myFunction()"
                                                                             style="margin-top: -10px">buy
@@ -606,7 +660,7 @@
                                                                         <input type="hidden"
                                                                             value="{{ $item->id }}"
                                                                             name="product_id">
-                                                                            <input type="hidden"
+                                                                        <input type="hidden"
                                                                             value="{{ $item->price_new }}"
                                                                             name="price">
                                                                         <button type="submit"

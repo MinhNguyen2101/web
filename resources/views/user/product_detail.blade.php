@@ -97,7 +97,7 @@
         }
 
         .details-pro .product-price {
-            font-size: 24px;
+            font-size: 34px;
             line-height: 30px;
             display: inline-block;
             color: #ff9897;
@@ -317,6 +317,18 @@
             background: #ff9897;
             bottom: 29px;
         }
+
+        /* style button size */
+        .wrapper {
+            display: inline-flex;
+            background: #fff;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 5px;
+            padding: 20px 15px;
+            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px
+        }
     </style>
     <div style="margin-bottom: 25px">
         <!-- BREADCUM -->
@@ -397,29 +409,57 @@
                         </span>
                         @if ($product->price_old)
                             <span class="old-price">
-                                <del class="price product-price-old sale">
+                                <del class="price product-price-old sale" style="font-size: 25px">
                                     {{ number_format($product->price_old) }}
                                 </del>
                             </span> <!-- Giá gốc -->
                         @endif
                     </div>
-                    <div class="product-summary product_description margin-bottom-0">
-                        <div class="rte description ">
 
-                            Thông tin sản phẩm đang được cập nhật.
-
-                        </div>
-                    </div>
 
                     <div style="width: 100%">
                         <div class="button_actions clearfix">
                             @if (empty(Auth::user()->id))
+                                <div class="wrapper">
+                                    <input type="radio" name = "size" value="s" checked
+                                        style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                    <label for="option-1" class="option option-1" style="font-size: 20px">
+                                        <div class="dot"></div>
+                                        <span>S</span>
+                                    </label>
+                                    <input type="radio" name = "size" value="M"
+                                        style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                    <label for="option-2" class="option option-2" style="font-size: 20px">
+                                        <div class="dot"></div>
+                                        <span>M</span>
+                                    </label>
+                                    <input type="radio" name = "size" value="l"
+                                        style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                    <label for="option-3" class="option option-3" style="font-size: 20px">
+                                        <div class="dot"></div>
+                                        <span>L</span>
+                                    </label>
+                                    <input type="radio" name = "size" value="xl"
+                                        style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                    <label for="option-4" class="option option-4" style="font-size: 20px">
+                                        <div class="dot"></div>
+                                        <span>XL</span>
+                                    </label>
+                                </div>
+                                <div class="product-summary product_description margin-bottom-0">
+                                    <div class="rte description ">
+
+                                        Thông tin sản phẩm đang được cập nhật.
+
+                                    </div>
+                                </div>
                                 <div class="label_sl margin-bottom-5"
-                                    style="display: flex; justify-content: space-around;width: 100%">
+                                    style="display: flex; justify-content: space-around;width: 100%;font-size: 15px">
                                     <span>Số lượng:</span>
                                     <input type="number" min="1" class="form-control"
                                         max="{{ $product->quantity }}"
-                                        style="width: 50%; margin-top:6px;margin-left: 15px" name="quantity">
+                                        style="width: 50%; margin-top:6px;margin-left: 15px;font-size: 25px"
+                                        name="quantity">
                                 </div>
                                 <div class="product-price-btn" style="margin-top: 25px">
                                     <a class="button">
@@ -432,11 +472,45 @@
                                     </a>
                                 </div>
                             @else
-                                <div class="product-price-btn" style="margin-top: 25px">
-                                    <form action="{{ route('add-to-card') }}" method="post">
+                                <form action="{{ route('add-to-card') }}" method="post">
+                                    <div class="wrapper">
+                                        <input type="radio" name="size" value="S" checked
+                                            style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                        <label for="option-1" class="option option-1" style="font-size: 20px">
+                                            <div class="dot"></div>
+                                            <span>S</span>
+                                        </label>
+                                        <input type="radio" name="size" value="M"
+                                            style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                        <label for="option-2" class="option option-2" style="font-size: 20px">
+                                            <div class="dot"></div>
+                                            <span>M</span>
+                                        </label>
+                                        <input type="radio" name = "size" value="L"
+                                            style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                        <label for="option-3" class="option option-3" style="font-size: 20px">
+                                            <div class="dot"></div>
+                                            <span>L</span>
+                                        </label>
+                                        <input type="radio" name = "size" value="XL"
+                                            style="font-size: 25px;margin-top: unset;margin: 5px;">
+                                        <label for="option-4" class="option option-4" style="font-size: 20px">
+                                            <div class="dot"></div>
+                                            <span>XL</span>
+                                        </label>
+                                    </div>
+                                    <div class="product-summary product_description margin-bottom-0">
+                                        <div class="rte description ">
+
+                                            Thông tin sản phẩm đang được cập nhật.
+
+                                        </div>
+                                    </div>
+                                    <div class="product-price-btn" style="margin-top: 25px">
+
                                         <div class="label_sl margin-bottom-5"
-                                            style="display: flex; justify-content: space-around;width: 100%">
-                                            <span>Số lượng:</span>
+                                            style="display: flex; justify-content: space-around;width: 100%;font-size: 15px">
+                                            <span style="font-size: 15px">Số lượng:</span>
                                             <input type="number" min="1" class="form-control"
                                                 max="{{ $product->quantity }}" required
                                                 style="width: 50%; margin-top:6px;margin-left: 15px;font-size: 15px"
@@ -454,8 +528,8 @@
                                                 </span>
                                             </button>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             @endif
 
                         </div>

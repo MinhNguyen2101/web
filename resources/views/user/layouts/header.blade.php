@@ -60,12 +60,13 @@
                         <!-- Search -->
                         <div style="justify-self: center;">
                             <form class="w-100 position-relative mb-5"
-                                style="border:1px solid #ff9897; border-radius: 30px;">
+                                style="border:1px solid #ff9897; border-radius: 30px;" action="{{route('search-product')}}" method="POST">
+                                @csrf
                                 <input type="hidden">
                                 <span
                                     class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
+                                        xmlns="http://www.w3.org/2000/svg" style="margin-left: 266px">
                                         <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
                                             height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
                                             fill="currentColor"></rect>
@@ -75,7 +76,7 @@
                                     </svg>
                                 </span>
                                 <input type="text" class="form-control form-control-lg form-control-solid px-15"
-                                    name="search" value="" placeholder="Search" style="border-radius:30px ;">
+                                    name="search" value="" placeholder="Search" style="border-radius:30px ;font-size:25px">
                             </form>
                         </div>
                         <!-- End Search -->

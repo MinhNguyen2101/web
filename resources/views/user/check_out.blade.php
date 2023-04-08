@@ -75,7 +75,7 @@
 
             <div class="card" style="margin-top: 15px;">
                 <div class="table-responsive">
-                    <table class="table align-items-center mb-0" style="width: 70%;text-align: center;margin-left: 17%">
+                    <table class="table align-items-center mb-0" style="width: 70%;text-align: center;margin-left: 17%;font-size: 15px">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary  font-weight-bolder opacity-7">Producr
@@ -85,6 +85,8 @@
                                     Quantity</th>
                                 <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">
                                     Price</th>
+                                <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">
+                                    Size</th>
                                 <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">
                                     Total</th>
                                 <th class="text-secondary opacity-7"></th>
@@ -96,6 +98,7 @@
                                 <input type="hidden" value="{{ $order_detail->product_id }}" name="product_id[]">
                                 <input type="hidden" value="{{ $order_detail->quantity }}" name="quantity[]">
                                 <input type="hidden" value="{{ $order_detail->price }}" name="price[]">
+                                <input type="hidden" value="{{ $order_detail->size }}" name="size">
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -114,12 +117,15 @@
                                     <td class="justify-content-center text-center">
                                         {{ number_format($order_detail->price) }}
                                     </td>
+                                    <td class="justify-content-center text-center">
+                                        {{$order_detail->size }}
+                                    </td>
                                     <td class="text-center">
                                         {{ number_format($order_detail->quantity * $order_detail->price) }}
                                     </td>
                                 </tr>
                                 <?php $total = $total + $order_detail->quantity * $order_detail->price; ?>
-                                <input type="hidden" value="{{$total}}" name="total_price">
+                                <input type="hidden" value="{{ $total }}" name="total_price">
                             @endforeach
                             <tr style="font-size: 17px">
                                 <td>

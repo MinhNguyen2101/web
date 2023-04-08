@@ -19,10 +19,28 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $products = Product::paginate(3);
+        $product = Product::query();
+        if(!empty($request->sort)){
+            if($request->sort == 'price_asc')
+            {
+                $product = $product->orderBy('price_new','asc');
+            }
+            else if($request->sort == 'price_desc'){
+                $product = $product->orderBy('price_new','desc');
+            }
+            else if($request->sort == 'name_asc')
+            {
+                $product = $product->orderBy('name','asc');
+            }
+            else{
+                $product = $product->orderBy('name','desc');
+            }
+        }
+
+        $products = $product->paginate(12);
         return view('user.product', compact('products'));
     }
 
@@ -76,7 +94,7 @@ class ProductController extends Controller
         } else {
             $quantity = 1;
         }
-        $product_isset = CartProduct::where('product_id', $request->product_id)->where('user_id', auth()->user()->id)->first();
+        $product_isset = CartProduct::where('product_id', $request->product_id)->where('size',$request->size)->where('user_id', auth()->user()->id)->first();
         if (!empty($product_isset)) {
             $quantity_old = $product_isset->quantity;
             $quantity_new = $quantity_old + $quantity;
@@ -90,6 +108,7 @@ class ProductController extends Controller
                 'product_id' => $request->product_id,
                 'price' => $request->price,
                 'quantity' => $quantity,
+                'size' => $request->size,
             ]);
         }
 
@@ -132,6 +151,7 @@ class ProductController extends Controller
             'status' => 1,
             'created_at' => now(),
             'updated_at' => now(),
+            
         ]);
 
 
@@ -152,6 +172,7 @@ class ProductController extends Controller
                 $order_detail->product_id = $item->product_id;
                 $order_detail->created_at = now();
                 $order_detail->updated_at = now();
+                $order_detail->size = $item->size;
                 $order_detail->save();
             }
             # delete product in Cart

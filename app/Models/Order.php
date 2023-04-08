@@ -15,6 +15,7 @@ class Order extends Model
         'address',
         'status',
         'total_price',
+        'size',
     ];
 
     public function user()

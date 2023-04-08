@@ -15,6 +15,7 @@ use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\ProfileController;
 use App\Models\CartProduct;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('order-process', [OrderController::class, 'orderProcess'])->name('order-process');
     Route::get('order-success', [OrderController::class, 'orderSuccess'])->name('order-success');
     Route::get('order-cancel', [OrderController::class, 'orderCancel'])->name('order-cancel');
+    Route::post('quan', [ProfileController::class, 'loadQuan'])->name('loadQuan');
+    Route::post('xa', [ProfileController::class, 'loadXa'])->name('loadXa');
 });
 
 // Route::resources(['home' => HomeController::class]);
@@ -57,8 +60,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 //     return view('user.homepage');
 // });
 
-Route::get('homepage', [HomepageController::class, 'index'])->name('trang-chu');
+// Route::get('homepage', [HomepageController::class, 'index'])->name('trang-chu');
 Route::resources(['product' => UserProductController::class]);
+Route::post('product',[UserProductController::class,'index'])->name('route-index');
 Route::get('/cart', [UserProductController::class, 'cartProduct'])->name('cartProduct');
 Route::post('/addtocard', [UserProductController::class, 'addToCard'])->name('add-to-card');
 Route::post('/updateQuantity', [UserProductController::class, 'updateQuantityCart'])->name('update-quantity');
@@ -69,6 +73,8 @@ Route::get('change-pass', [ProfileController::class, 'showChangePass'])->name('s
 Route::post('change-pass', [ProfileController::class, 'changePass'])->name('change-pass');
 Route::get('checkout', [ProfileController::class, 'checkout'])->name('checkout');
 Route::post('check-out', [UserProductController::class, 'orderCheckout'])->name('order');
+Route::get('trang_chu', [HomepageController::class,'index'])->name('trang-chu');
+Route::post('search-product',[HomepageController::class,'searchProduct'])->name('search-product');
 // Route::get('product', function () {
 //     return view('user.product');
 // });

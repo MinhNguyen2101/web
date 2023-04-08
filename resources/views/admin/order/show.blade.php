@@ -67,7 +67,8 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producr</th>
-
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Size</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Quantity</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -91,6 +92,9 @@
                                             <h6 class="mb-0 text-xs">{{ $order_detail->product->name }}</h6>
                                         </div>
                                     </div>
+                                </td>
+                                <td class="justify-content-center text-center">
+                                    {{ $order_detail->size }}
                                 </td>
                                 <td class="justify-content-center text-center">
                                     {{ $order_detail->quantity }}
