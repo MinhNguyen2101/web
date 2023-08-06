@@ -40,7 +40,7 @@ class ProductController extends Controller
             }
         }
 
-        $products = $product->paginate(12);
+        $products = $product->where('status',1)->paginate(12);
         return view('user.product', compact('products'));
     }
 
@@ -94,7 +94,7 @@ class ProductController extends Controller
         } else {
             $quantity = 1;
         }
-        $product_isset = CartProduct::where('product_id', $request->product_id)->where('size',$request->size)->where('user_id', auth()->user()->id)->first();
+        $product_isset = CartProduct::where('product_id', $request->product_id)->where('user_id', auth()->user()->id)->first();
         if (!empty($product_isset)) {
             $quantity_old = $product_isset->quantity;
             $quantity_new = $quantity_old + $quantity;
@@ -108,7 +108,6 @@ class ProductController extends Controller
                 'product_id' => $request->product_id,
                 'price' => $request->price,
                 'quantity' => $quantity,
-                'size' => $request->size,
             ]);
         }
 
@@ -172,7 +171,6 @@ class ProductController extends Controller
                 $order_detail->product_id = $item->product_id;
                 $order_detail->created_at = now();
                 $order_detail->updated_at = now();
-                $order_detail->size = $item->size;
                 $order_detail->save();
             }
             # delete product in Cart

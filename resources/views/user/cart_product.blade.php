@@ -277,6 +277,16 @@
         .container {
             max-width: 1500px;
         }
+
+        .table-cart thead {
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+
+        .table-cart td {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
     </style>
     @include('user.layouts.header')
     <div class="container">
@@ -290,67 +300,88 @@
                         </div>
                     </div>
                 </div>
+                <table class="table-cart">
+                    <thead style="font-size: 15px; color: #ff9897;margin-bottom: 50px">
+                        <th></th>
+                        <th>Sản phẩm</th>
+                        <th>Giá tiền</th>
+                        <th>Thành tiền</th>
+                        <th>Số lượng</th>
+                        <th></th>
+                    </thead>
+                    <!-- Product #1 -->
+                    <tbody>
+                        <div class="item">
+                            @foreach ($productCart as $item)
+                                <tr>
 
-                <!-- Product #1 -->
-                @foreach ($productCart as $item)
-                    <div class="item">
-
-                        <div class="buttons">
-                            <form action="{{ route('deleteProduct') }}" method="POST">
-                                @csrf
-                                <input type="hidden" value="{{ $item->id }}" name="cart_id">
-                                <button type="submit" class="delete-btn"></button>
-                            </form>
+                                    <td>
+                                        <div class="buttons">
+                                            <form action="{{ route('deleteProduct') }}" method="POST"
+                                                id="delete_product" class="delete_product">
+                                                @csrf
+                                                <input type="hidden" value="{{ $item->id }}" name="cart_id">
+                                                <button type="button" class="delete-btn" id="button_delete"
+                                                    data-url="{{ route('deleteProduct') }} "
+                                                    data-id="{{ $item->id }}"></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td style="display: flex">
+                                        <div class="image">
+                                            <img style="width: 120px;height: 80px;"
+                                                src="{{ asset('storage') }}/{{ $item->product->image }}"
+                                                alt="" />
+                                        </div>
+                                        <div class="description" style="width: 50%">
+                                            <span
+                                                style="
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    line-height: 25px;
+                                                    -webkit-line-clamp: 2;
+                                                    height: 50px;
+                                                    display: -webkit-box;
+                                                    -webkit-box-orient: vertical;">
+                                                {{ $item->product->name }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="total-price">{{ number_format($item->product->price_new) }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="total-price" style="color: #ff9897,">
+                                            {{ number_format($item->product->price_new * $item->quantity) }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('update-quantity') }}" method="POST"
+                                            style="display: flex">
+                                            @csrf
+                                            <input type="hidden" value="{{ $item->product_id }}" name="product_id">
+                                            <input type="number" class="form-control" min="1"
+                                                value="{{ $item->quantity }}" max="{{ $item->product->quantity }}"
+                                                name="quantity_new"
+                                                style=" margin-top: 24px;
+                                                        width: 75px;
+                                                        height: 50%; font-size: 15px">
+                                            <button class="btn btn-secondary"
+                                                style="margin-top: 25px;width: 75px;font-size: 12px;margin-left: 15px"
+                                                type="submit">Update</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </div>
 
-                        <div class="image">
-                            <img style="width: 120px;height: 80px;"
-                                src="{{ asset('storage') }}/{{ $item->product->image }}" alt="" />
-                        </div>
-
-                        <div class="description" style="width: 20%">
-                            <span
-                                style="
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            line-height: 25px;
-                            -webkit-line-clamp: 2;
-                            height: 50px;
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;">
-                                {{ $item->product->name }}
-                            </span>
-                        </div>
-
-                        <div class="total-price">{{ number_format($item->product->price_new) }}
-                        </div>
-
-                        <div class="total-price">Size:{{ ($item->size) }}
-                        </div>
-
-                        <div class="total-price" style="color: #ff9897,">
-                            {{ number_format($item->product->price_new * $item->quantity) }}
-                        </div>
-                        <form action="{{ route('update-quantity') }}" method="POST" style="display: flex">
-                            @csrf
-                            <input type="hidden" value="{{ $item->product_id }}" name="product_id">
-                            <input type="number" class="form-control" min="1" value="{{ $item->quantity }}"
-                                max="{{ $item->product->quantity }}" name="quantity_new"
-                                style=" margin-top: 24px;
-                                    width: 75px;
-                                    height: 50%; font-size: 15px">
-
-                            <button class="btn btn-secondary" style="margin-top: 25px;width: 75px;font-size: 12px"
-                                type="submit">Update</button>
-                        </form>
-
-                    </div>
-                @endforeach
+                    </tbody>
+                </table>
                 {{-- End Item --}}
             </div>
             <div class="total" style="flex: 3;height: 250px;margin-top:100px">
                 <h1> Total</h1>
-
                 <div>
                     <div class="li_table shopping-cart-table-total">
                         <span class="li-left li_text">
@@ -412,6 +443,42 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
+
+        $(document).on('click', '#button_delete', function(evt) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let form = $('form.delete_product');
+                    let url = form.attr('action');
+                    var formData = new FormData(document.getElementById("delete_product"));
+                    console.log(form);
+                    $.ajax({
+                        url: `${url}`,
+                        type: "POST",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            window.location.reload();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    });
+
+                }
+            })
+        })
     </script>
 </body>
 

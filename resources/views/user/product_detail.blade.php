@@ -420,7 +420,7 @@
                     <div style="width: 100%">
                         <div class="button_actions clearfix">
                             @if (empty(Auth::user()->id))
-                                <div class="wrapper">
+                                {{-- <div class="wrapper">
                                     <input type="radio" name = "size" value="s" checked
                                         style="font-size: 25px;margin-top: unset;margin: 5px;">
                                     <label for="option-1" class="option option-1" style="font-size: 20px">
@@ -445,7 +445,7 @@
                                         <div class="dot"></div>
                                         <span>XL</span>
                                     </label>
-                                </div>
+                                </div> --}}
                                 <div class="product-summary product_description margin-bottom-0">
                                     <div class="rte description ">
 
@@ -473,7 +473,7 @@
                                 </div>
                             @else
                                 <form action="{{ route('add-to-card') }}" method="post">
-                                    <div class="wrapper">
+                                    {{-- <div class="wrapper">
                                         <input type="radio" name="size" value="S" checked
                                             style="font-size: 25px;margin-top: unset;margin: 5px;">
                                         <label for="option-1" class="option option-1" style="font-size: 20px">
@@ -498,7 +498,7 @@
                                             <div class="dot"></div>
                                             <span>XL</span>
                                         </label>
-                                    </div>
+                                    </div> --}}
                                     <div class="product-summary product_description margin-bottom-0">
                                         <div class="rte description ">
 

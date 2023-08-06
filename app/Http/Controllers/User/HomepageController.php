@@ -11,8 +11,8 @@ class HomepageController extends Controller
     //
     public function index(Request $request)
     {
-        $product_new = Product::orderBy('id', 'desc')->limit(3)->get();
-        $product_sale = Product::limit(3)->where('price_old', '!=', null)->get();
+        $product_new = Product::orderBy('id', 'desc')->where('status',1)->limit(3)->get();
+        $product_sale = Product::limit(3)->where('price_old', '!=', null)->where('status',1)->get();
 
         return view('user.homepage', compact('product_new', 'product_sale'));
     }

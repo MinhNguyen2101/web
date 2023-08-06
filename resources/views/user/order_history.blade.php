@@ -123,6 +123,9 @@
             color: #fff;
             padding: 5px;
         }
+        td{
+            vertical-align: middle!important;
+        }
     </style>
     @include('user.layouts.header')
     <!-- BREADCUM -->
@@ -199,21 +202,21 @@
                                             {{-- @if (count($order_history) > 0) --}}
                                             @foreach ($order_history as $item)
                                                 <tr>
-                                                    <td>
+                                                    <td style=" vertical-align: middle">
                                                         <a href="{{ route('profile.show', $item->id) }}">
                                                             {{ $item->order_code }}
                                                         </a>
                                                     </td>
-                                                    <td>
+                                                    <td style=" vertical-align: middle">
                                                         {{ date('d-m-Y', strtotime($item->created_at)) }}
                                                     </td>
-                                                    <td>
+                                                    <td style=" vertical-align: middle">
                                                         {{ $item->address }}
                                                     </td>
-                                                    <td>
+                                                    <td style=" vertical-align: middle">
                                                         {{ number_format($item->total_price) }}
                                                     </td>
-                                                    <td>
+                                                    <td style=" vertical-align: middle">
                                                         @if ($item->status == 1)
                                                             Đơn hàng mới
                                                         @elseif($item->status == 2)
@@ -224,7 +227,7 @@
                                                             Đơn hàng bị hủy
                                                         @endif
                                                     </td>
-                                                    <td>
+                                                    <td style=" vertical-align: middle">
                                                         @if ($item->status == 1)
                                                             <form id="logout-form" action="" method="POST">
                                                                 @csrf
