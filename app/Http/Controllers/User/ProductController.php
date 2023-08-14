@@ -172,6 +172,12 @@ class ProductController extends Controller
                 $order_detail->created_at = now();
                 $order_detail->updated_at = now();
                 $order_detail->save();
+                
+                // minus quantity product in ware house
+                
+                $product = Product::find($item->product_id);
+                $product->quantity = $product->quantity - $item->quantity ; 
+                $product->save();
             }
             # delete product in Cart
             CartProduct::where('user_id', auth()->user()->id)->delete();

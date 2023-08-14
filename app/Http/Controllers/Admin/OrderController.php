@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
@@ -85,6 +86,17 @@ class OrderController extends Controller
         $order->update([
             'status' => $request->status,
         ]);
+        if($request->status == 4)
+        {
+            $orderDetail = OrderDetail::where('order_id',$request->order_id)->get();
+            
+            foreach($orderDetail as $item) {
+                $product = Product::find($item->product_id);
+                $product->quantity = $product->quantity + $item->quantity ; 
+                $product->save();
+            }
+
+        }
         Session::flash('message', 'Đơn hàng đã được chuyển trạng thái');
 
         return json_encode(array(
