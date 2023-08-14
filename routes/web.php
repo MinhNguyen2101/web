@@ -30,12 +30,13 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 
 // Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomepageController::class,'index'])->name('home');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [AdminRegisterController::class, 'register']);
+Route::get('/home', [HomepageController::class,'index'])->name('home');
 
 
 
