@@ -98,10 +98,9 @@ class ProfileController extends Controller
     {
         $productCarts = CartProduct::where('user_id', auth()->user()->id)->get();
 
-        $province = Province::all();
 
 
-        return view('user.check_out', compact('productCarts', 'province'));
+        return view('user.check_out', compact('productCarts'));
     }
 
     public function loadQuan(Request $request)
