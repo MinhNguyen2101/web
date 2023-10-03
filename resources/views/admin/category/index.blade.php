@@ -1,8 +1,19 @@
 @extends('admin.layouts.app')
 @section('contents')
+    <style>
+    </style>
     <div style="padding:15px">
         <div style="display: flex">
             <h1 style="flex: 1">Category</h1>
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <form action="/admin/category" method="get">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control" placeholder="Name/ Enter for submit" name="search"/>
+                        <button>Submit </button>
+                    </form>
+                </div>
+            </div>
             <button type="button" class="btn bg-gradient-success btn_create_category" data-bs-toggle="modal"
                 data-bs-target="#modal-create">Create</button>
         </div>
@@ -17,7 +28,8 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name
                             </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="width: 100px">
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                style="width: 100px">
                                 Description</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Created at</th>

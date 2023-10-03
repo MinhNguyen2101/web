@@ -19,10 +19,16 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $suppliers = Supplier::orderBy('id', 'desc')->paginate(8);
+
+        $query = Supplier::query();
+        $search = $request->search;
+
+        $suppliers = $query->when(!empty($search), function($q) use($search) {
+            $q->where('name' , 'like', '%' .$search . '%');
+        })->orderBy('id', 'desc')->paginate(8);
 
         return view('admin.supplier.index', ['suppliers' => $suppliers]);
     }

@@ -20,10 +20,15 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $categories = Category::orderBy('id', 'desc')->paginate(8);
+        $query = Category::query();
+        $search = $request->search;
+
+        $categories = $query->when(!empty($search), function($q) use($search) {
+            $q->where('name' , 'like', '%' .$search . '%');
+        })->orderBy('id', 'desc')->paginate(8);
 
         return view('admin.category.index', ['categories' => $categories]);
     }
@@ -214,4 +219,5 @@ class CategoryController extends Controller
             }
         }
     }
+
 }

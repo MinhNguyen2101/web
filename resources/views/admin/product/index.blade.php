@@ -66,6 +66,15 @@
     <div style="padding:15px">
         <div style="display: flex">
             <h1 style="flex: 1">Product</h1>
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <form action="/admin/product" method="get">
+                        <label class="form-label"></label>
+                        <input type="text" class="form-control" placeholder="Name/ Enter for submit" name="search"/>
+                        <button>Submit </button>
+                    </form>
+                </div>
+            </div>
             <button type="button" class="btn bg-gradient-success btn_create" data-bs-toggle="modal"
                 data-bs-target="#modal-create">Create</button>
         </div>
