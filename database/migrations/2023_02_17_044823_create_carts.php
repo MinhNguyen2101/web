@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('quantity');
             $table->double('price');
-            $table->string('size');
             $table->timestamps();
         });
     }
