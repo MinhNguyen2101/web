@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use DataTables;
 
 class ProductController extends Controller
 {
@@ -34,6 +35,18 @@ class ProductController extends Controller
 
         return view('admin.product.index', compact('products', 'categories', 'suppliers'));
     }
+
+    public function getDataForTable () {
+        return DataTables()::of(Product::query()->with('category',"supplier"))->addColumn('image', function ($product) {
+            return ` <img src=" asset('storage/' . $product->image)" class="card-img-top"
+            alt="...">`;
+        })->addColumn('category', function ($product) {
+            return  $product->category->name;
+        })->addColumn('supplier', function ($product) {
+            return  $product->supplier->name;
+        })->make(true);
+    }
+
 
     /**
      * Show the form for creating a new resource.

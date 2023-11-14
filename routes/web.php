@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('order-cancel', [OrderController::class, 'orderCancel'])->name('order-cancel');
     Route::post('quan', [ProfileController::class, 'loadQuan'])->name('loadQuan');
     Route::post('xa', [ProfileController::class, 'loadXa'])->name('loadXa');
+    Route::get('getData', [ProductController::class, 'getDataForTable'])->name('dataForTable');
 });
 
 // Route::resources(['home' => HomeController::class]);

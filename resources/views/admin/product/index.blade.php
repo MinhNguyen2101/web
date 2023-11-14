@@ -83,7 +83,7 @@
 
         <div class="card">
             <div class="table-responsive">
-                <table class="table align-items-center mb-0" style="width:100%">
+                <table class="table align-items-center mb-0" style="width:100%" id="table_product">
                     <thead>
                         <tr>
                             <th
@@ -92,6 +92,10 @@
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
                                 Product
+                            </th>
+                            <th
+                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
+                                Image
                             </th>
 
                             <th
@@ -124,78 +128,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $product)
-                            <tr>
-                                <div class="d-flex px-2 py-1 justify-content-center">
-                                    <td>
-                                        {{ $product->id }}
-                                    </td>
-                                </div>
-                                <td>
-                                    <div class="d-flex px-2 py-1 justify-content-center">
-                                        <div style="width: 125px;">
-                                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top"
-                                                alt="...">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">{{ $product->name }}</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{ $product->quantity }}
-                                </td>
-                                <td>
-                                    {{ $product->price_new }}
-                                </td>
-                                <td>
-                                    {{ $product->price_old }}
-                                </td>
-                                <td>
-                                    {{ $product->category->name }}
-                                </td>
-                                <td>
-                                    <label class="switch">
-                                        <input data-id="{{ $product->id }}" class="toggle-class" type="checkbox"
-                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                            data-on="Active" data-off="InActive"
-                                            data-url="{{ route('admin.changeStatus') }}"
-                                            {{ $product->status == 1 ? 'checked' : '' }}>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span
-                                        class="text-secondary text-xs font-weight-normal">{{ $product->created_at }}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        class="text-secondary text-xs font-weight-normal">{{ $product->updated_at }}</span>
-                                </td>
-                                <td class="align-middle" style="width: 15%">
-                                    <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-bs-target="#modal-update" data-bs-toggle="modal"
-                                        data-url="{{ route('admin.product.edit', $product->id) }}">
-                                        <button type="button" class="btn btn-secondary edit_product"
-                                            data-url="{{ route('admin.product.edit', $product->id) }}">Edit</button>
-                                    </a>
-                                    {{-- <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        <button type="button" class="btn btn-danger button-delete"
-                                            data-id="{{ $product->id }}"
-                                            data-url="{{ route('admin.product.destroy', $product->id) }}">Delete</button>
-                                    </a> --}}
-                                </td>
-                            </tr>
-                        @endforeach
+                        
                     </tbody>
                 </table>
-                {{ $products->links() }}
+                
             </div>
         </div>
     </div>
     @push('page_script')
         <script>
+
+            $(document).ready(function () {
+                        $('#table_product').DataTable({
+                            "processing": true,
+                            "serverSide": true,
+                            "ajax": "{{ route('admin.dataForTable') }}",
+                            "columns": [
+                                { "data": "id" },
+                                { "data": "name" },
+                                { "data": "image" },
+                                { "data": "price_old" },
+                                { "data": "price_new" },
+                                { "data": "supplier" },
+                                { "data": "status" },
+                                { "data": "create_at" },
+                                { "data": "updated_at" },
+                            ]
+                        });
+                });
+
             $(function() {
                 $('.toggle-class').change(function() {
                     var status = $(this).prop('checked') == true ? 1 : 0;
