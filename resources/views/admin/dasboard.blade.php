@@ -1,23 +1,23 @@
 @extends('admin.layouts.app')
 @section('contents')
-<div style="margin-left: 200px;margin-top:50px">
-        <div class="row" style="margin-bottom: 50px">
-            <form action="" method="get" class="form-create">
+<div style="margin-top:50px">
+        <div class="row" style="margin-bottom: 50px" style="display: flex">
+            <form action="" method="get" class="form-create"style = "display:flex;justify-content:center;align-items:center;padding-left:212px" >
                 @csrf
-                <div class="col">
+                <div style="width: 30%">
                     <label for="date_from">Date From</label>
                     <input type="date" value="" class="form-control" name="date_from" style="border: 1px solid; width:30%">
                 </div>
-                <div class="col">
+                <div style="width: 30%" >
                     <label for="date_to">Date To</label>
                     <input type="date" value="" class="form-control" name="date_to" style="border: 1px solid ; width:30%">
                 </div>
-                <div>
-                    <button type="submit" class="submit-date" data-url = {{route('admin.dashboard.index')}}>submit</button>
+                <div style="width: 30%">
+                    <button type="submit" class="submit-date bg-gradient-success" data-url = {{route('admin.dashboard.index')}}>submit</button>
                 </div>
             </form>
         </div>
-        <div class="row">
+        <div class="row" style="justify-content: center">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
@@ -56,8 +56,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row" style="margin-top: 50px">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
@@ -76,14 +74,11 @@
                     </div>
                 </div>
             </div>
-            
         </div>
+        
     </div>
     <div style="width: 80%; margin: auto;">
         <canvas id="barChart"></canvas>
-    </div>
-    <div style="width: 50%; margin: auto;">
-        <canvas id="barChartOrder"></canvas>
     </div>
 
     <div id="chart-container" style="width: 366px;height:300px;margin-left:16%;margin-top:25px">
@@ -91,7 +86,7 @@
     </div>
 
     @push('page_script')
-        <script>
+        <script type="module">
             var data = {!! json_encode($dataForChart) !!};
             var ctx = document.getElementById('barChart').getContext('2d');
             var myBarChart = new Chart(ctx, {

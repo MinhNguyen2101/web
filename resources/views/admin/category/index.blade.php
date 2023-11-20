@@ -6,13 +6,6 @@
         <div style="display: flex">
             <h1 style="flex: 1">Category</h1>
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group input-group-outline">
-                    <form action="/admin/category" method="get">
-                        <label class="form-label"></label>
-                        <input type="text" class="form-control" placeholder="Name/ Enter for submit" name="search"/>
-                        <button>Submit </button>
-                    </form>
-                </div>
             </div>
             <button type="button" class="btn bg-gradient-success btn_create_category" data-bs-toggle="modal"
                 data-bs-target="#modal-create">Create</button>
@@ -22,7 +15,7 @@
 
         <div class="card">
             <div class="table-responsive">
-                <table class="table align-items-center mb-0" style="width:100%">
+                <table class="table align-items-center mb-0" style="width:100%" id="table-category">
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
@@ -35,10 +28,12 @@
                                 Created at</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Updated at</th>
-                            <th class="text-secondary opacity-7"></th>
+                            <th>Update</th>
+                            <th class="text-secondary opacity-7">delete</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {{-- <tbody>
                         @foreach ($categories as $category)
                             <tr>
                                 <div class="d-flex px-2 py-1">
@@ -76,14 +71,67 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody>
+                    </tbody> --}}
                 </table>
-                {{ $categories->links() }}
+                {{-- {{ $categories->links() }} --}}
             </div>
         </div>
     </div>
     @push('page_script')
         <script>
+
+                $(document).ready(function () {
+                    $('#table-category').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": "{{ route('admin.dataForTableCategory') }}",
+                        "columns": [
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "description" },
+                    { "data": "created_at" },
+                    { "data": "updated_at" },
+                    {
+                        "data": "update",
+                        "render": function (data, type, row) {
+                            var editRoute = "{{ route('admin.category.edit', ':id') }}";
+                            editRoute = editRoute.replace(':id', row.id);
+
+                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
+                                'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
+                                'data-url="' + editRoute + '">' +
+                                '<button type="button" class="btn btn-secondary edit_category" ' +
+                                'data-url="' + editRoute + '">Edit</button>' +
+                                '</a>';
+                        }
+
+                    },
+                    {
+                        "data": "delete",
+                        "render": function (data, type, row) {
+                            var deleteRoute = "{{ route('admin.category.destroy', ':id') }}";
+                            deleteRoute = deleteRoute.replace(':id', row.id);
+
+                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' + 
+                                '<button type="button" class="btn btn-danger button-delete" data-id="' + row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
+                                '</a>';
+                        }
+
+                    },
+]
+
+                    });
+                });
+
+                $(document).on('click', '.button-delete', function() {
+    var categoryId = $(this).data('id');
+    var deleteUrl = $(this).data('url');
+
+    // Implement your delete logic using categoryId and deleteUrl
+});
+
+
+
             // CREATE
             $(document).on('click', '.btn_create_category', function() {
                 let url = $(this).data('url');

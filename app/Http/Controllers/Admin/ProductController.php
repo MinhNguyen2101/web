@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -36,17 +38,25 @@ class ProductController extends Controller
         return view('admin.product.index', compact('products', 'categories', 'suppliers'));
     }
 
-    public function getDataForTable () {
-        return DataTables()::of(Product::query()->with('category',"supplier"))->addColumn('image', function ($product) {
-            return ` <img src=" asset('storage/' . $product->image)" class="card-img-top"
-            alt="...">`;
-        })->addColumn('category', function ($product) {
-            return  $product->category->name;
-        })->addColumn('supplier', function ($product) {
-            return  $product->supplier->name;
-        })->make(true);
+    public function getDataForTable()
+    {
+        return DataTables::of(Product::query()->with('category', 'supplier'))
+            ->addColumn('image', function ($product) {
+                return asset("storage/" . $product->image) ;
+            })
+            ->addColumn('category', function ($product) {
+                return $product->category->name;
+            })
+            ->addColumn('supplier', function ($product) {
+                return $product->supplier->name;
+            })
+            ->make(true);
     }
 
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+    }
 
     /**
      * Show the form for creating a new resource.

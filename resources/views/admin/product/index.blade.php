@@ -2,6 +2,18 @@
 @section('contents')
     <style>
         /* The switch - the box around the slider */
+        body{
+            font-size: 15px!important
+        }
+        #table_product_filter .form-control {
+            font-size: 18px;
+            border: 1px solid;
+            margin: 10px;
+            border-radius: 15px
+        }
+        #table_product_length label {
+            font-size: 18px!important   
+        }
         .switch {
             position: relative;
             display: inline-block;
@@ -66,7 +78,9 @@
     <div style="padding:15px">
         <div style="display: flex">
             <h1 style="flex: 1">Product</h1>
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            {{-- <a href="{{ route('admin.export.products') }}" class="btn btn-success">Export Products</a> --}}
+
+            {{-- <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group input-group-outline">
                     <form action="/admin/product" method="get">
                         <label class="form-label"></label>
@@ -74,7 +88,7 @@
                         <button>Submit </button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
             <button type="button" class="btn bg-gradient-success btn_create" data-bs-toggle="modal"
                 data-bs-target="#modal-create">Create</button>
         </div>
@@ -91,7 +105,7 @@
                                 ID</th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Product
+                                Name
                             </th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
@@ -124,6 +138,7 @@
                             <th
                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 justify-content-center">
                                 Updated at</th>
+                               
                             <th class="text-secondary opacity-7 justify-content-center"></th>
                         </tr>
                     </thead>
@@ -138,24 +153,49 @@
     @push('page_script')
         <script>
 
-            $(document).ready(function () {
-                        $('#table_product').DataTable({
-                            "processing": true,
-                            "serverSide": true,
-                            "ajax": "{{ route('admin.dataForTable') }}",
-                            "columns": [
-                                { "data": "id" },
-                                { "data": "name" },
-                                { "data": "image" },
-                                { "data": "price_old" },
-                                { "data": "price_new" },
-                                { "data": "supplier" },
-                                { "data": "status" },
-                                { "data": "create_at" },
-                                { "data": "updated_at" },
-                            ]
-                        });
-                });
+$(document).ready(function () {
+    $('#table_product').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": "{{ route('admin.dataForTable') }}",
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            {
+                "data": "image",
+                "render": function (data, type, row) {
+                    return '<img src="' + data + '" class="card-img-top" alt="...">';
+                }
+            },
+            { "data": "quantity" },
+            { "data": "price_old" },
+            { "data": "price_new" },
+            { "data": "category" },
+            { "data": "status" },
+            { "data": "created_at" },
+            { "data": "updated_at" },
+            
+            {
+                "data": "update",
+                "render": function (data, type, row) {
+    var editRoute = "{{ route('admin.product.edit', ':id') }}";
+    editRoute = editRoute.replace(':id', row.id);
+
+    return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
+           'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
+           'data-url="' + editRoute + '">' +
+           '<button type="button" class="btn btn-secondary edit_product" ' +
+           'data-url="' + editRoute + '">Edit</button>' +
+           '</a>';
+}
+
+
+            },
+
+        ]
+    });
+});
+
 
             $(function() {
                 $('.toggle-class').change(function() {

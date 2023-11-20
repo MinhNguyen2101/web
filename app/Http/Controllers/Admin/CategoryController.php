@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule as ValidationRule;
 use Illuminate\Support\Facades\Session;
+use DataTables;
 
 class CategoryController extends Controller
 {
@@ -31,6 +32,21 @@ class CategoryController extends Controller
         })->orderBy('id', 'desc')->paginate(8);
 
         return view('admin.category.index', ['categories' => $categories]);
+    }
+
+    public function getDataForTable()
+    {
+        return DataTables::of(Category::query   ())
+    ->addColumn('delete', function ($category) {
+        return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">
+                    <button type="button" class="btn btn-danger button-delete" data-id="' . $category->id . '" data-url="' . route('admin.category.destroy', $category->id) . '">Delete</button>
+                </a>';
+    })
+    ->make(true);
+
+
+
+
     }
 
     /**

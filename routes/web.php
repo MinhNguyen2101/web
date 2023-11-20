@@ -14,6 +14,7 @@ use App\Http\Controllers\User\HomepageController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\ProfileController;
 use App\Models\CartProduct;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -55,6 +56,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('quan', [ProfileController::class, 'loadQuan'])->name('loadQuan');
     Route::post('xa', [ProfileController::class, 'loadXa'])->name('loadXa');
     Route::get('getData', [ProductController::class, 'getDataForTable'])->name('dataForTable');
+    Route::get('/export-products', [ProductController::class,'export'])->name('export.products');
+    Route::get('getDataCategory', [CategoryController::class, 'getDataForTable'])->name('dataForTableCategory');
+
 });
 
 // Route::resources(['home' => HomeController::class]);
