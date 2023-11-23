@@ -3,15 +3,6 @@
     <div style="padding:15px">
         <div style="display: flex">
             <h1 style="flex: 1">Suppliers</h1>
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group input-group-outline">
-                    <form action="/admin/category" method="get">
-                        <label class="form-label"></label>
-                        <input type="text" class="form-control" placeholder="Name/ Enter for submit" name="search"/>
-                        <button>Submit </button>
-                    </form>
-                </div>
-            </div>
             <button type="button" class="btn bg-gradient-success btn_create" data-bs-toggle="modal"
                 data-bs-target="#modal-create">Create</button>
         </div>
@@ -20,7 +11,7 @@
 
         <div class="card">
             <div class="table-responsive">
-                <table class="table align-items-center mb-0" style="width:100%">
+                <table class="table align-items-center mb-0" style="width:100%" id= "table_supplier">
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
@@ -40,60 +31,56 @@
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($suppliers as $supplier)
-                            <tr>
-                                <div class="d-flex px-2 py-1">
-                                    <td>
-                                        {{ $supplier->id }}
-                                    </td>
-                                </div>
-                                <td>
-                                    {{ $supplier->name }}
-                                </td>
-                                <td>
-                                    {{ $supplier->email }}
-                                </td>
-                                <td>
-                                    {{ $supplier->telephone }}
-                                </td>
-                                <div class="d-flex px-2 py-1">
-                                    <td class="align-middle text-center text-sm">
-                                        {{ $supplier->description }}
-                                    </td>
-                                </div>
-                                <td class="align-middle text-center">
-                                    <span
-                                        class="text-secondary text-xs font-weight-normal">{{ $supplier->created_at }}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        class="text-secondary text-xs font-weight-normal">{{ $supplier->updated_at }}</span>
-                                </td>
-                                <td class="align-middle" style="width: 15%">
-                                    <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-bs-target="#modal-update" data-bs-toggle="modal"
-                                        data-url="{{ route('admin.supplier.edit', $supplier->id) }}">
-                                        <button type="button" class="btn btn-secondary edit_supplier"
-                                            data-url="{{ route('admin.supplier.edit', $supplier->id) }}">Edit</button>
-                                    </a>
-                                    <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        <button type="button" class="btn btn-danger button-delete"
-                                            data-id="{{ $supplier->id }}"
-                                            data-url="{{ route('admin.supplier.destroy', $supplier->id) }}">Delete</button>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                   
                 </table>
-                {{ $suppliers->links() }}
             </div>
         </div>
     </div>
     @push('page_script')
         <script>
+
+    $(document).ready(function () {
+                    $('#table_supplier').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": "{{ route('admin.dataForTableSupplier') }}",
+                        "columns": [
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "email" },
+                    { "data": "telephone" },
+                    { "data": "description" },
+                    {
+                        "data": "update",
+                        "render": function (data, type, row) {
+                            var editRoute = "{{ route('admin.supplier.edit', ':id') }}";
+                            editRoute = editRoute.replace(':id', row.id);
+
+                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
+                                'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
+                                'data-url="' + editRoute + '">' +
+                                '<button type="button" class="btn btn-secondary edit_supplier" ' +
+                                'data-url="' + editRoute + '">Edit</button>' +
+                                '</a>';
+                        }
+
+                    },
+                    {
+                        "data": "delete",
+                        "render": function (data, type, row) {
+                            var deleteRoute = "{{ route('admin.supplier.destroy', ':id') }}";
+                            deleteRoute = deleteRoute.replace(':id', row.id);
+
+                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' + 
+                                '<button type="button" class="btn btn-danger button-delete" data-id="' + row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
+                                '</a>';
+                        }
+
+                    },
+                ]
+
+                    });
+            });
             // CREATE
             $(document).on('click', '.btn_create', function() {
                 let url = $(this).data('url');

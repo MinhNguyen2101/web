@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('getData', [ProductController::class, 'getDataForTable'])->name('dataForTable');
     Route::get('/export-products', [ProductController::class,'export'])->name('export.products');
     Route::get('getDataCategory', [CategoryController::class, 'getDataForTable'])->name('dataForTableCategory');
+    Route::get('getDataSupplier', [SupplierController::class, 'getDataForTable'])->name('dataForTableSupplier');
+    Route::get('getDataOrderSuccess', [OrderController::class, 'getDataForTableSuccess'])->name('dataForTableOrderSucess');
+    
 
 });
 

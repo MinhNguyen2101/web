@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule as ValidationRule;
+use DataTables;
 
 class SupplierController extends Controller
 {
@@ -28,9 +29,21 @@ class SupplierController extends Controller
 
         $suppliers = $query->when(!empty($search), function($q) use($search) {
             $q->where('name' , 'like', '%' .$search . '%');
-        })->orderBy('id', 'desc')->paginate(8);
+        })->orderBy('id', 'desc')->get();
 
         return view('admin.supplier.index', ['suppliers' => $suppliers]);
+    }
+
+    public function getDataForTable()
+    {
+        return DataTables::of(Supplier::query   ())
+        ->addColumn('delete', function ($supplier) {
+            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">
+                        <button type="button" class="btn btn-danger button-delete" data-id="' . $supplier->id . '" data-url="' . route('admin.supplier.destroy', $supplier->id) . '">Delete</button>
+                    </a>';
+            })
+        ->make(true);
+
     }
 
     /**

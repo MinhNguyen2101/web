@@ -9,6 +9,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
+use DataTables;
 
 class OrderController extends Controller
 {
@@ -31,6 +32,28 @@ class OrderController extends Controller
 
         return view('admin.order.order_process', compact('orders'));
     }
+
+    public function getDataForTableSuccess()
+    {
+        return DataTables::of(Order::where('status',3)->with('user')->get())
+        ->addColumn('user', function ($order) {
+            return $order->user->name;
+            })
+        ->addColumn('status', function ($order) {
+            if($order->status == 1) {
+                return "Đơn hàng mới ";
+            }else if($order->status == 2) {
+                return "Đơn hàng đang xử lý ";
+            }else if($order->status == 3) {
+                return "Giao hang thanh cong";
+            }else  {
+                return "Đơn hàng bị hủy";
+            }
+            })
+        ->make(true);
+
+    }
+
     public function orderSuccess()
     {
         $orders = Order::orderBy('id', 'desc')->where('status', 3)->paginate(8);
