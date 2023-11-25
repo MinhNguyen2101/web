@@ -8,11 +8,16 @@
             width: 60px;
             height: 34px;
         }
+
         #table_order_success_filter .form-control {
             font-size: 18px;
             border: 1px solid;
             margin: 10px;
             border-radius: 15px
+        }
+
+        .page-link {
+            width: 75px !important;
         }
 
         #table_product_length label {
@@ -98,7 +103,7 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
                                 Status</th>
-                            
+
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Created at</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -107,41 +112,53 @@
                             </th>
                         </tr>
                     </thead>
-                    
+
                 </table>
             </div>
         </div>
     </div>
 
     <script>
-        $(document).ready(function () {
-                $('#table_order_success').DataTable({
-                    "processing": true,
-                    "serverSide": true,
-                    "ajax": "{{ route('admin.dataForTableOrderSucess') }}",
-                    "columns": [
-                { "data": "id" },
-                { "data": "user" },
-                { "data": "total_price" },
-                { "data": "address" },
-                { "data": "status" },
-                { "data": "created_at" },
-                { "data": "updated_at" },
-                {
-                    "data": "info",
-                    "render" : function (data, type, row) {
-                        var editRoute = "{{ route('admin.order.show', ':id') }}";
-                        editRoute = editRoute.replace(':id', row.id);
+        $(document).ready(function() {
+            $('#table_order_success').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{ route('admin.dataForTableOrderSucess') }}",
+                "columns": [{
+                        "data": "id"
+                    },
+                    {
+                        "data": "user"
+                    },
+                    {
+                        "data": "total_price"
+                    },
+                    {
+                        "data": "address"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "created_at"
+                    },
+                    {
+                        "data": "updated_at"
+                    },
+                    {
+                        "data": "info",
+                        "render": function(data, type, row) {
+                            var editRoute = "{{ route('admin.order.show', ':id') }}";
+                            editRoute = editRoute.replace(':id', row.id);
 
-                        return '<a href="'+ editRoute +'">'+
-                                        '<button type="button" class="btn btn-info">Info</button>'+
-                                    '</a>'
+                            return '<a href="' + editRoute + '">' +
+                                '<button type="button" class="btn btn-info">Info</button>' +
+                                '</a>'
+                        }
                     }
-                }
-            ]
+                ]
 
-                });
+            });
         });
-</script>
-    
+    </script>
 @endsection

@@ -8,11 +8,16 @@
             width: 60px;
             height: 34px;
         }
+
         #table_order_cancel_filter .form-control {
             font-size: 18px;
             border: 1px solid;
             margin: 10px;
             border-radius: 15px
+        }
+
+        .page-link {
+            width: 75px !important;
         }
 
         #table_product_length label {

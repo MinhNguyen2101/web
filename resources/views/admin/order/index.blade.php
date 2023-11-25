@@ -9,6 +9,10 @@
             height: 34px;
         }
 
+        .page-link {
+            width: 75px !important;
+        }
+
         #table_order_new_filter .form-control {
             font-size: 18px;
             border: 1px solid;

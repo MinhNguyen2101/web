@@ -14,6 +14,9 @@
             margin: 10px;
             border-radius: 15px
         }
+        .page-link{
+            width: 75px!important;
+        }
 
         #table_product_length label {
             font-size: 18px !important

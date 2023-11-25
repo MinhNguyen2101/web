@@ -1,5 +1,16 @@
 @extends('admin.layouts.app')
 @section('contents')
+    <style>
+        .text-description {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 360px;
+        }
+        .page-link{
+            width: 75px!important;
+        }
+    </style>
     <div style="padding:15px">
         <div style="display: flex">
             <h1 style="flex: 1">Suppliers</h1>
@@ -31,55 +42,68 @@
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
-                   
+
                 </table>
             </div>
         </div>
     </div>
     @push('page_script')
         <script>
+            $(document).ready(function() {
+                $('#table_supplier').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": "{{ route('admin.dataForTableSupplier') }}",
+                    "columns": [{
+                            "data": "id"
+                        },
+                        {
+                            "data": "name"
+                        },
+                        {
+                            "data": "email"
+                        },
+                        {
+                            "data": "telephone"
+                        },
+                        {
+                            "data": "description",
+                            'render': function(data, type, row) {
+                                return '<p class=" text-description" data-bs-toggle="tooltip" data-bs-placement="top" title="' +
+                                    data + '"p>' + data + '</p>';
+                            }
+                        },
+                        {
+                            "data": "update",
+                            "render": function(data, type, row) {
+                                var editRoute = "{{ route('admin.supplier.edit', ':id') }}";
+                                editRoute = editRoute.replace(':id', row.id);
 
-    $(document).ready(function () {
-                    $('#table_supplier').DataTable({
-                        "processing": true,
-                        "serverSide": true,
-                        "ajax": "{{ route('admin.dataForTableSupplier') }}",
-                        "columns": [
-                    { "data": "id" },
-                    { "data": "name" },
-                    { "data": "email" },
-                    { "data": "telephone" },
-                    { "data": "description" },
-                    {
-                        "data": "update",
-                        "render": function (data, type, row) {
-                            var editRoute = "{{ route('admin.supplier.edit', ':id') }}";
-                            editRoute = editRoute.replace(':id', row.id);
+                                return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
+                                    'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
+                                    'data-url="' + editRoute + '">' +
+                                    '<button type="button" class="btn btn-secondary edit_supplier" ' +
+                                    'data-url="' + editRoute + '">Edit</button>' +
+                                    '</a>';
+                            }
 
-                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
-                                'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
-                                'data-url="' + editRoute + '">' +
-                                '<button type="button" class="btn btn-secondary edit_supplier" ' +
-                                'data-url="' + editRoute + '">Edit</button>' +
-                                '</a>';
-                        }
+                        },
+                        {
+                            "data": "delete",
+                            "render": function(data, type, row) {
+                                var deleteRoute = "{{ route('admin.supplier.destroy', ':id') }}";
+                                deleteRoute = deleteRoute.replace(':id', row.id);
 
-                    },
-                    {
-                        "data": "delete",
-                        "render": function (data, type, row) {
-                            var deleteRoute = "{{ route('admin.supplier.destroy', ':id') }}";
-                            deleteRoute = deleteRoute.replace(':id', row.id);
+                                return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' +
+                                    '<button type="button" class="btn btn-danger button-delete" data-id="' +
+                                    row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
+                                    '</a>';
+                            }
 
-                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' + 
-                                '<button type="button" class="btn btn-danger button-delete" data-id="' + row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
-                                '</a>';
-                        }
+                        },
+                    ]
 
-                    },
-                ]
-
-                    });
+                });
             });
             // CREATE
             $(document).on('click', '.btn_create', function() {

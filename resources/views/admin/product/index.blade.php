@@ -30,6 +30,7 @@
             width: 0;
             height: 0;
         }
+
         #table_product_filter .form-control {
             font-size: 18px;
             border: 1px solid;
@@ -39,6 +40,10 @@
 
         #table_product_length label {
             font-size: 18px !important
+        }
+
+        .page-link {
+            width: 75px !important;
         }
 
         /* The slider */

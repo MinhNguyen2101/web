@@ -7,6 +7,15 @@
             margin: 10px;
             border-radius: 15px
         }
+        .text-description {
+            overflow: hidden;
+            white-space: nowrap; 
+            text-overflow: ellipsis;
+            width: 360px;
+        }
+        .page-link{
+            width: 75px!important;
+        }
     </style>
     <div style="padding:15px">
         <div style="display: flex">
@@ -57,7 +66,10 @@
                             "data": "name"
                         },
                         {
-                            "data": "description"
+                            "data": "description",
+                            'render': function(data, type, row){
+                                return '<p class=" text-description" data-bs-toggle="tooltip" data-bs-placement="top" title="' + data + '"p>' + data+ '</p>'; 
+                            }
                         },
                         {
                             "data": "created_at"

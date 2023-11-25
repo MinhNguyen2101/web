@@ -77,9 +77,13 @@
         </div>
         
     </div>
-    <div style="width: 80%; margin: auto;">
-        <canvas id="barChart"></canvas>
-    </div>
+    <div class="card mb-3" style="width: 50%;margin-top:40px;margin-left:40px">
+        <div class="card-body p-3">
+          <div class="chart">
+            <canvas id="bar-chart" class="chart-canvas" height="300px"></canvas>
+          </div>
+        </div>
+      </div>
 
     <div id="chart-container" style="width: 366px;height:300px;margin-left:16%;margin-top:25px">
         <canvas id="graph"></canvas>
@@ -88,7 +92,7 @@
     @push('page_script')
         <script type="module">
             var data = {!! json_encode($dataForChart) !!};
-            var ctx = document.getElementById('barChart').getContext('2d');
+            var ctx = document.getElementById('bar-chart').getContext('2d');
             var myBarChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
