@@ -1,6 +1,12 @@
 @extends('admin.layouts.app')
 @section('contents')
     <style>
+        #table-category_filter .form-control {
+            font-size: 18px;
+            border: 1px solid;
+            margin: 10px;
+            border-radius: 15px
+        }
     </style>
     <div style="padding:15px">
         <div style="display: flex">
@@ -33,102 +39,71 @@
                             <th></th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @foreach ($categories as $category)
-                            <tr>
-                                <div class="d-flex px-2 py-1">
-                                    <td>
-                                        {{ $category->id }}
-                                    </td>
-                                </div>
-                                <td>
-                                    {{ $category->name }}
-                                </td>
-                                <td class="align-middle text-center text-sm" style="width: 50%">
-                                    {{ $category->description }}
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span
-                                        class="text-secondary text-xs font-weight-normal">{{ $category->created_at }}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        class="text-secondary text-xs font-weight-normal">{{ $category->updated_at }}</span>
-                                </td>
-                                <td class="align-middle" style="width: 15%">
-                                    <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-bs-target="#modal-update" data-bs-toggle="modal"
-                                        data-url="{{ route('admin.category.edit', $category->id) }}">
-                                        <button type="button" class="btn btn-secondary edit_category"
-                                            data-url="{{ route('admin.category.edit', $category->id) }}">Edit</button>
-                                    </a>
-                                    <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        <button type="button" class="btn btn-danger button-delete"
-                                            data-id="{{ $category->id }}"
-                                            data-url="{{ route('admin.category.destroy', $category->id) }}">Delete</button>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody> --}}
                 </table>
-                {{-- {{ $categories->links() }} --}}
             </div>
         </div>
     </div>
     @push('page_script')
         <script>
+            $(document).ready(function() {
+                $('#table-category').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": "{{ route('admin.dataForTableCategory') }}",
+                    "columns": [{
+                            "data": "id"
+                        },
+                        {
+                            "data": "name"
+                        },
+                        {
+                            "data": "description"
+                        },
+                        {
+                            "data": "created_at"
+                        },
+                        {
+                            "data": "updated_at"
+                        },
+                        {
+                            "data": "update",
+                            "render": function(data, type, row) {
+                                var editRoute = "{{ route('admin.category.edit', ':id') }}";
+                                editRoute = editRoute.replace(':id', row.id);
 
-                $(document).ready(function () {
-                    $('#table-category').DataTable({
-                        "processing": true,
-                        "serverSide": true,
-                        "ajax": "{{ route('admin.dataForTableCategory') }}",
-                        "columns": [
-                    { "data": "id" },
-                    { "data": "name" },
-                    { "data": "description" },
-                    { "data": "created_at" },
-                    { "data": "updated_at" },
-                    {
-                        "data": "update",
-                        "render": function (data, type, row) {
-                            var editRoute = "{{ route('admin.category.edit', ':id') }}";
-                            editRoute = editRoute.replace(':id', row.id);
+                                return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
+                                    'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
+                                    'data-url="' + editRoute + '">' +
+                                    '<button type="button" class="btn btn-secondary edit_category" ' +
+                                    'data-url="' + editRoute + '">Edit</button>' +
+                                    '</a>';
+                            }
 
-                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
-                                'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
-                                'data-url="' + editRoute + '">' +
-                                '<button type="button" class="btn btn-secondary edit_category" ' +
-                                'data-url="' + editRoute + '">Edit</button>' +
-                                '</a>';
-                        }
+                        },
+                        {
+                            "data": "delete",
+                            "render": function(data, type, row) {
+                                var deleteRoute = "{{ route('admin.category.destroy', ':id') }}";
+                                deleteRoute = deleteRoute.replace(':id', row.id);
 
-                    },
-                    {
-                        "data": "delete",
-                        "render": function (data, type, row) {
-                            var deleteRoute = "{{ route('admin.category.destroy', ':id') }}";
-                            deleteRoute = deleteRoute.replace(':id', row.id);
+                                return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' +
+                                    '<button type="button" class="btn btn-danger button-delete" data-id="' +
+                                    row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
+                                    '</a>';
+                            }
 
-                            return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' + 
-                                '<button type="button" class="btn btn-danger button-delete" data-id="' + row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
-                                '</a>';
-                        }
+                        },
+                    ]
 
-                    },
-                ]
-
-                    });
                 });
+            });
 
-                $(document).on('click', '.button-delete', function() {
-    var categoryId = $(this).data('id');
-    var deleteUrl = $(this).data('url');
+            $(document).on('click', '.button-delete', function() {
+                var categoryId = $(this).data('id');
+                var deleteUrl = $(this).data('url');
 
-    // Implement your delete logic using categoryId and deleteUrl
-});
+                // Implement your delete logic using categoryId and deleteUrl
+            });
 
 
 

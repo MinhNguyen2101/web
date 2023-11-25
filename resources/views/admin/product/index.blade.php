@@ -2,18 +2,21 @@
 @section('contents')
     <style>
         /* The switch - the box around the slider */
-        body{
-            font-size: 15px!important
+        body {
+            font-size: 15px !important
         }
+
         #table_product_filter .form-control {
             font-size: 18px;
             border: 1px solid;
             margin: 10px;
             border-radius: 15px
         }
+
         #table_product_length label {
-            font-size: 18px!important   
+            font-size: 18px !important
         }
+
         .switch {
             position: relative;
             display: inline-block;
@@ -26,6 +29,16 @@
             opacity: 0;
             width: 0;
             height: 0;
+        }
+        #table_product_filter .form-control {
+            font-size: 18px;
+            border: 1px solid;
+            margin: 10px;
+            border-radius: 15px
+        }
+
+        #table_product_length label {
+            font-size: 18px !important
         }
 
         /* The slider */
@@ -138,63 +151,79 @@
                             <th
                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 justify-content-center">
                                 Updated at</th>
-                               
+
                             <th class="text-secondary opacity-7 justify-content-center"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
                 </table>
-                
+
             </div>
         </div>
     </div>
     @push('page_script')
         <script>
+            $(document).ready(function() {
+                $('#table_product').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": "{{ route('admin.dataForTable') }}",
+                    "columns": [{
+                            "data": "id"
+                        },
+                        {
+                            "data": "name"
+                        },
+                        {
+                            "data": "image",
+                            "render": function(data, type, row) {
+                                return '<img src="' + data + '" class="card-img-top" alt="...">';
+                            }
+                        },
+                        {
+                            "data": "quantity"
+                        },
+                        {
+                            "data": "price_old"
+                        },
+                        {
+                            "data": "price_new"
+                        },
+                        {
+                            "data": "category"
+                        },
+                        {
+                            "data": "status"
+                        },
+                        {
+                            "data": "created_at"
+                        },
+                        {
+                            "data": "updated_at"
+                        },
 
-$(document).ready(function () {
-    $('#table_product').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": "{{ route('admin.dataForTable') }}",
-        "columns": [
-            { "data": "id" },
-            { "data": "name" },
-            {
-                "data": "image",
-                "render": function (data, type, row) {
-                    return '<img src="' + data + '" class="card-img-top" alt="...">';
-                }
-            },
-            { "data": "quantity" },
-            { "data": "price_old" },
-            { "data": "price_new" },
-            { "data": "category" },
-            { "data": "status" },
-            { "data": "created_at" },
-            { "data": "updated_at" },
-            
-            {
-                "data": "update",
-                "render": function (data, type, row) {
-    var editRoute = "{{ route('admin.product.edit', ':id') }}";
-    editRoute = editRoute.replace(':id', row.id);
+                        {
+                            "data": "update",
+                            "render": function(data, type, row) {
+                                var editRoute = "{{ route('admin.product.edit', ':id') }}";
+                                editRoute = editRoute.replace(':id', row.id);
 
-    return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
-           'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
-           'data-url="' + editRoute + '">' +
-           '<button type="button" class="btn btn-secondary edit_product" ' +
-           'data-url="' + editRoute + '">Edit</button>' +
-           '</a>';
-}
+                                return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" ' +
+                                    'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
+                                    'data-url="' + editRoute + '">' +
+                                    '<button type="button" class="btn btn-secondary edit_product" ' +
+                                    'data-url="' + editRoute + '">Edit</button>' +
+                                    '</a>';
+                            }
 
 
-            },
+                        },
 
-        ]
-    });
-});
+                    ]
+                });
+            });
 
 
             $(function() {

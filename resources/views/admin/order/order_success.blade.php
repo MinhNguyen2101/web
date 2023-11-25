@@ -8,6 +8,17 @@
             width: 60px;
             height: 34px;
         }
+        #table_order_success_filter .form-control {
+            font-size: 18px;
+            border: 1px solid;
+            margin: 10px;
+            border-radius: 15px
+        }
+
+        #table_product_length label {
+            font-size: 18px !important
+        }
+
 
         /* Hide default HTML checkbox */
         .switch input {
@@ -98,7 +109,6 @@
                     </thead>
                     
                 </table>
-                {{ $orders->links() }}
             </div>
         </div>
     </div>

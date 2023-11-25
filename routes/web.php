@@ -60,8 +60,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('getDataCategory', [CategoryController::class, 'getDataForTable'])->name('dataForTableCategory');
     Route::get('getDataSupplier', [SupplierController::class, 'getDataForTable'])->name('dataForTableSupplier');
     Route::get('getDataOrderSuccess', [OrderController::class, 'getDataForTableSuccess'])->name('dataForTableOrderSucess');
-    
-
+    Route::get('getDataOrderProcess', [OrderController::class, 'getDataForTableProcess'])->name('getDataOrderProcess');
+    Route::get('getDataOrderNew', [OrderController::class, 'getDataForTableNew'])->name('getDataOrderNew');
+    Route::get('getDataOrderCancel', [OrderController::class, 'getDataForTableCancel'])->name('getDataOrderCancel');
 });
 
 // Route::resources(['home' => HomeController::class]);

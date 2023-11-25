@@ -8,6 +8,17 @@
             width: 60px;
             height: 34px;
         }
+        #table_order_process_filter .form-control {
+            font-size: 18px;
+            border: 1px solid;
+            margin: 10px;
+            border-radius: 15px
+        }
+
+        #table_product_length label {
+            font-size: 18px !important
+        }
+
 
         /* Hide default HTML checkbox */
         .switch input {
@@ -71,7 +82,7 @@
         </div>
         <div class="card">
             <div class="table-responsive">
-                <table class="table align-items-center mb-0" style="width:100%">
+                <table class="table align-items-center mb-0" style="width:100%" id='table_order_process'>
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
@@ -98,76 +109,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($orders as $order)
-                            <tr>
-                                <div class="d-flex px-2 py-1">
-                                    <td>
-                                        {{ $order->id }}
-                                    </td>
-                                </div>
-                                <td>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 ">{{ $order->user->name }}</h6>
-                                        <p class="text-secondary mb-0">{{ $order->user->email }}</p>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center">
-                                    {{ number_format($order->total_price) }}
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{ $order->address }}
-                                </td>
-
-                                <td class="align-middle text-center text-sm">
-                                    @if ($order->status === 1)
-                                        <span class="badge bg-gradient-secondary">Đơn hàng mới</span>
-                                    @elseif($order->status === 2)
-                                        <span class="badge bg-gradient-danger"> Đơn hàng đang xử lý</span>
-                                    @elseif($order->status === 3)
-                                        <span class="badge bg-gradient-success">Giao hàng thành công</span>
-                                    @else
-                                        <span class="badge bg-gradient-danger">Đơn hàng bị hủy</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <label class="switch">
-                                        <input data-id="{{ $order->id }}" class="toggle-class" type="checkbox"
-                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                            data-on="Active" data-off="InActive"
-                                            data-url="{{ route('admin.changeStatusOrder') }}"
-                                            {{ $order->status == 3 ? 'checked' : '' }}>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-normal">{{ $order->created_at }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-normal">{{ $order->updated_at }}</span>
-                                </td>
-                                <td class="align-middle" style="width: 15%">
-                                    {{-- <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-bs-target="#modal-update" data-bs-toggle="modal"
-                                        data-url="{{ route('admin.order.edit', $order->id) }}">
-                                        <button type="button" class="btn btn-secondary edit_order"
-                                            data-url="{{ route('admin.order.edit', $order->id) }}">Edit</button>
-                                    </a> --}}
-                                    <a href="{{ route('admin.order.show', $order->id) }}">
-                                        <button type="button" class="btn btn-info">Info</button>
-                                    </a>
-                                    {{-- <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        <button type="button" class="btn btn-danger button-delete"
-                                            data-id="{{ $order->id }}"
-                                            data-url="{{ route('admin.order.destroy', $order->id) }}">Delete</button>
-                                    </a> --}}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
-                {{ $orders->links() }}
             </div>
         </div>
     </div>
@@ -191,6 +133,48 @@
                         }
                     });
                 })
+            });
+
+            $(document).ready(function() {
+                $('#table_order_process').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": "{{ route('admin.getDataOrderProcess') }}",
+                    "columns": [{
+                            "data": "id"
+                        },
+                        {
+                            "data": "user"
+                        },
+                        {
+                            "data": "total_price"
+                        },
+                        {
+                            "data": "address"
+                        },
+                        {
+                            "data": "status"
+                        },
+                        {
+                            "data": "created_at"
+                        },
+                        {
+                            "data": "updated_at"
+                        },
+                        {
+                            "data": "info",
+                            "render": function(data, type, row) {
+                                var editRoute = "{{ route('admin.order.show', ':id') }}";
+                                editRoute = editRoute.replace(':id', row.id);
+
+                                return '<a href="' + editRoute + '">' +
+                                    '<button type="button" class="btn btn-info">Info</button>' +
+                                    '</a>'
+                            }
+                        }
+                    ]
+
+                });
             });
         </script>
     @endpush
