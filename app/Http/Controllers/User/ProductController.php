@@ -7,6 +7,7 @@ use App\Models\CartProduct;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,15 @@ class ProductController extends Controller
                 $product = $product->orderBy('name','desc');
             }
         }
+        $category = $request->category;
 
-        $products = $product->where('status',1)->paginate(12);
-        return view('user.product', compact('products'));
+        $products = $product->when(!empty($category), function($q) use($category) {
+            $q->where('category_id' , $category);
+        })->where('status',1)->paginate(12);
+        $category = Category::limit(3)->get();
+
+
+        return view('user.product', compact('products','category'));
     }
 
     /**
@@ -74,17 +81,19 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $category = Category::limit(3)->get();
         $product = Product::find($id);
 
-        return view('user.product_detail', compact('product'));
+        return view('user.product_detail', compact('product','category'));
     }
 
     public function cartProduct()
     {
+        $category = Category::limit(3)->get();
         $productCart = CartProduct::where('user_id', auth()->user()->id)->get();
 
 
-        return view('user.cart_product', compact('productCart'));
+        return view('user.cart_product', compact('productCart','category'));
     }
 
     public function addToCard(Request $request)

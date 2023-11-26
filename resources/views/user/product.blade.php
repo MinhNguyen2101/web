@@ -518,9 +518,6 @@
                                                 </span>
                                                 <span style="margin-left:886px">
                                                     <div class="input-group mb-3">
-                                                        {{-- <strong style="margin-right: 10px">
-                                                                    <div style="margin-top: 7px">Sắp xếp</div>
-                                                                </strong> --}}
                                                         <form action="{{ route('route-index') }}" method="post">
                                                             @csrf
                                                             <select class="custom-select" id="inputGroupSelect01"
@@ -541,9 +538,6 @@
                                                 </h3>
                                                 <span style="margin-left:820px">
                                                     <div class="input-group mb-3">
-                                                        {{-- <strong style="margin-right: 10px">
-                                                                    <div style="margin-top: 7px">Sắp xếp</div>
-                                                                </strong> --}}
                                                         <form action="{{ route('search-product') }}" method="post">
                                                             @csrf
                                                             @if (!empty($name_search))

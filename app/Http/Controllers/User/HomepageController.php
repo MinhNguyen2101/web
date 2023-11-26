@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -13,8 +14,9 @@ class HomepageController extends Controller
     {
         $product_new = Product::orderBy('id', 'desc')->where('status',1)->limit(3)->get();
         $product_sale = Product::limit(3)->where('price_old', '!=', null)->where('status',1)->get();
+        $category = Category::limit(3)->get();
 
-        return view('user.homepage', compact('product_new', 'product_sale'));
+        return view('user.homepage', compact('product_new', 'product_sale' , 'category'));
     }
 
     public function searchProduct(Request $request)

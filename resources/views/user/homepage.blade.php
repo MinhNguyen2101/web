@@ -653,8 +653,8 @@
                 </div>
                 <div style="display: flex;">
                     @foreach ($product_sale as $item)
-                        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a class="height_name text2line"
-                                href="">
+                        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                            <a class="height_name text2line" href="{{ route('product.show', $item->id) }}">
                                 <div class="product_border">
                                     <div class="product-box-h" style="border: 2px solid #ff9897 ">
                                         <div class="product-thumbnail">
@@ -675,7 +675,7 @@
                                         </div>
                                         <div class="product-info a-left">
                                             <h3 class="product-name">
-                                                <a class="height_name text2line" href="">
+                                                <a class="height_name text2line" href="{{ route('product.show', $item->id) }} ">
                                                     {{ $item->name }}
                                                 </a>
                                             </h3>
@@ -730,13 +730,13 @@
                                                         </div>
                                                     @else
                                                         <div class="product-price-btn" style="margin-top: 25px">
-                                                            <form action="{{route('add-to-card')}}" method="post">
+                                                            <form action="{{ route('add-to-card') }}" method="post">
                                                                 @csrf
                                                                 <input type="hidden" value="{{ Auth::user()->id }}"
                                                                     name="user_id">
                                                                 <input type="hidden" value="{{ $item->id }}"
                                                                     name="product_id">
-                                                                    <input type="hidden" value="{{ $item->price_new }}"
+                                                                <input type="hidden" value="{{ $item->price_new }}"
                                                                     name="price">
                                                                 <button type="submit">buy now</button>
                                                             </form>
@@ -770,6 +770,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -815,7 +816,8 @@
                                     </div>
                                     <div class="product-info a-left">
                                         <h3 class="product-name">
-                                            <a class="height_name text2line" href="">
+                                            <a class="height_name text2line" href="{{ route('product.show', $item->id) }}" style="fon
+                                            15px">
                                                 {{ $item->name }}
                                             </a>
                                         </h3>

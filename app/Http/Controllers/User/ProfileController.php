@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,16 +23,18 @@ class ProfileController extends Controller
     {
         //
         $profile = User::find(auth()->user()->id);
+        $category = Category::limit(3)->get();
 
-        return view('user.profile', compact('profile'));
+        return view('user.profile', compact('profile','category'));
     }
 
     public function orderHistory()
     {
+        $category = Category::limit(3)->get();
         $order_history = Order::where('user_id', auth()->user()->id)->get();
         $profile = User::find(auth()->user()->id);
 
-        return view('user.order_history', compact('order_history', 'profile'));
+        return view('user.order_history', compact('order_history', 'profile','category'));
     }
 
     /**
@@ -64,15 +67,17 @@ class ProfileController extends Controller
     public function show($id)
     {
         //
+        $category = Category::limit(3)->get();
         $order_details = OrderDetail::where('order_id', $id)->get();
         $order = Order::find($id);
 
-        return view('user.order_detail', compact('order', 'order_details'));
+        return view('user.order_detail', compact('order', 'order_details','category'));
     }
     public function showChangePass()
     {
         $profile = User::find(auth()->user()->id);
-        return view('user.change_password', compact('profile'));
+        $category = Category::limit(3)->get();
+        return view('user.change_password', compact('profile','category'));
     }
 
     public function changePass(Request $request)
