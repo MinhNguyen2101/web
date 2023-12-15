@@ -26,7 +26,7 @@
                             <i class="material-icons opacity-10">weekend</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Total Product</p>
+                            <p class="text-sm mb-0 text-capitalize">Tổng sản phẩm</p>
                             <h4 class="mb-0">{{ $total_product }}</h4>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Total Users</p>
+                            <p class="text-sm mb-0 text-capitalize">Tổng người dùng</p>
                             <h4 class="mb-0">{{ $total_user }}</h4>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Total Category</p>
+                            <p class="text-sm mb-0 text-capitalize">Tổng danh mục</p>
                             <h4 class="mb-0">{{ $total_category }}</h4>
                         </div>
                     </div>

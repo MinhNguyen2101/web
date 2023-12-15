@@ -446,13 +446,13 @@
 
         $(document).on('click', '#button_delete', function(evt) {
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Bạn có chắc không?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Đồng ý'
             }).then((result) => {
                 if (result.isConfirmed) {
                     let form = $('form.delete_product');

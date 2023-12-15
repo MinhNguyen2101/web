@@ -50,6 +50,10 @@ class OrderController extends Controller
                 return "Đơn hàng bị hủy";
             }
             })
+        ->addColumn('update', function ($order) {
+                // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
+                return $order->updated_at->format('Y-m-d H:i:s');
+            })
         ->make(true);
 
     }
@@ -71,6 +75,10 @@ class OrderController extends Controller
                 return "Đơn hàng bị hủy";
             }
             })
+            ->addColumn('update', function ($order) {
+                // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
+                return $order->updated_at->format('Y-m-d H:i:s');
+            })
         ->make(true);
 
     }
@@ -91,6 +99,10 @@ class OrderController extends Controller
                 return "Đơn hàng bị hủy";
             }
             })
+            ->addColumn('update', function ($order) {
+                // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
+                return $order->updated_at->format('Y-m-d H:i:s');
+            })
         ->make(true);
 
     }
@@ -110,6 +122,10 @@ class OrderController extends Controller
             }else  {
                 return "Đơn hàng bị hủy";
             }
+            })
+            ->addColumn('update', function ($order) {
+                // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
+                return $order->updated_at->format('Y-m-d H:i:s');
             })
         ->make(true);
 

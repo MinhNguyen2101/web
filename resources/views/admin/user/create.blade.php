@@ -5,7 +5,7 @@
             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title font-weight-normal" id="modal-title-default">CREATE USER</h6>
+                        <h6 class="modal-title font-weight-normal" id="modal-title-default">Thêm người dùng</h6>
                         <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -14,7 +14,7 @@
                         <form action="{{ route('admin.user.store') }}" method="POST" class="form_create">
                             @csrf
                             <div class="input-group input-group-static mb-4">
-                                <label>Name <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Tên <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="text" class="form-control value_input" name="name">
                                 <span class="invalid-object" role="alert">
                                     <strong class="name_error error" style="color: red"></strong>
@@ -28,18 +28,18 @@
                                 </span>
                             </div>
                             <div class="input-group input-group-static mb-4">
-                                <label>Password <i class="fa-solid fa-asterisk" style="color: red"></i></label>
+                                <label>Mật khẩu <i class="fa-solid fa-asterisk" style="color: red"></i></label>
                                 <input type="password" class="form-control value_input" name="password">
                                 <span class="invalid-object" role="alert">
                                     <strong class="password_error error" style="color: red"></strong>
                                 </span>
                             </div>
                             <div class="input-group input-group-static mb-4">
-                                <label>Role <i class="fa-solid fa-asterisk" style="color: red"></i></label>
+                                <label>Quyền <i class="fa-solid fa-asterisk" style="color: red"></i></label>
                                 <select name="role" id="" class="input-group ">
                                     <option value=""> ------ Select Role -------</option>
                                     <option value="1">
-                                        User
+                                        Khách hàng
                                     </option>
                                     <option value="2">
                                         Admin
@@ -53,8 +53,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-primary btn-save"
-                            data-url="{{ route('admin.category.store') }}">Create</button>
-                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                            data-url="{{ route('admin.category.store') }}">Thêm</button>
+                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </div>
             </div>

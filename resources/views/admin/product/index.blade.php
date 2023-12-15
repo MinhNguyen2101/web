@@ -95,20 +95,20 @@
     </style>
     <div style="padding:15px">
         <div style="display: flex">
-            <h1 style="flex: 1">Product</h1>
-            {{-- <a href="{{ route('admin.export.products') }}" class="btn btn-success">Export Products</a> --}}
+            <h1 style="flex: 1">Sản phẩm</h1>
+            {{-- <a href="{{ route('admin.export.products') }}" class="btn btn-success">Export sản phẩm</a> --}}
 
             {{-- <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group input-group-outline">
                     <form action="/admin/product" method="get">
                         <label class="form-label"></label>
                         <input type="text" class="form-control" placeholder="Name/ Enter for submit" name="search"/>
-                        <button>Submit </button>
+                        <button>Đòng ý</button>
                     </form>
                 </div>
             </div> --}}
             <button type="button" class="btn bg-gradient-success btn_create" data-bs-toggle="modal"
-                data-bs-target="#modal-create">Create</button>
+                data-bs-target="#modal-create">Thêm</button>
         </div>
         @include('admin.product.create')
         @include('admin.product.update')
@@ -123,41 +123,41 @@
                                 ID</th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Name
+                                Tên
                             </th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Image
+                                Ảnh
                             </th>
 
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Quantity
+                                Số lượng
                             </th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Price New
+                                Giá mới
                             </th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Price Old
+                                Giá cũ
                             </th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Category
+                                Danh mục
                             </th>
                             <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 justify-content-center">
-                                Status
+                                Trạng thái
                             </th>
                             <th
                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 justify-content-center">
-                                Created at</th>
+                                Thời gian tạo</th>
                             <th
                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 justify-content-center">
-                                Updated at</th>
+                                Thời gian cập nhật</th>
 
-                            <th class="text-secondary opacity-7 justify-content-center"></th>
+                            <th class="text-secondary opacity-7 justify-content-center">Cập nhật</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -219,14 +219,15 @@
                                     'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
                                     'data-url="' + editRoute + '">' +
                                     '<button type="button" class="btn btn-secondary edit_product" ' +
-                                    'data-url="' + editRoute + '">Edit</button>' +
+                                    'data-url="' + editRoute + '">Cập nhật</button>' +
                                     '</a>';
                             }
 
 
                         },
 
-                    ]
+                    ],
+                    "searching": true,
                 });
             });
 
@@ -361,13 +362,13 @@
                 var id = $(this).data('id');
                 console.log(url);
                 Swal.fire({
-                        title: "Are you sure?",
+                        title: "Bạn chắc chắn không?",
                         // text: "{{ __('messages.once_delete') }}",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: "Yes,delete it!"
+                        confirmButtonText: "Đồng ý"
                     })
                     .then((result) => {
                         if (result.isConfirmed) {

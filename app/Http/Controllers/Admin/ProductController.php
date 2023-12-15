@@ -50,6 +50,10 @@ class ProductController extends Controller
             ->addColumn('supplier', function ($product) {
                 return $product->supplier->name;
             })
+            ->addColumn('update', function ($product) {
+                // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
+                return $product->updated_at->format('Y-m-d H:i:s');
+            })
             ->make(true);
     }
 
@@ -250,7 +254,7 @@ class ProductController extends Controller
         if ($status) {
             DB::commit();
 
-            $messages_update =  'Update Product ' . $id . ' successfully!';
+            $messages_update =  'Cập nhật sản phẩm ' . $id . ' thành công!';
 
             Session::flash('message', $messages_update);
 
@@ -275,7 +279,7 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->save();
 
-        $messages_update =  'Update Status product ' . $request->product_id . ' successfully!';
+        $messages_update =  'Cập nhật trạng thái sản phẩm ' . $request->product_id . ' thành công!';
         Session::flash('message', $messages_update);
 
         return json_encode(array(

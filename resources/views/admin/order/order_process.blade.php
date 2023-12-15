@@ -81,7 +81,7 @@
         <div style="display: flex">
             <h1 style="flex: 1">Đơn hàng đang được xử lý </h1>
             {{-- <button type="button" class="btn bg-gradient-success btn_create_order" data-bs-toggle="modal"
-                data-bs-target="#modal-create">Create</button> --}}
+                data-bs-target="#modal-create">Thêm</button> --}}
         </div>
         <div class="card">
             <div class="table-responsive">
@@ -89,25 +89,25 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên
                             </th>
 
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
-                                Total Price</th>
+                                Tổng tiền</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
-                                Address</th>
+                                Địa chỉ</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
-                                Status</th>
+                                Trạng thái</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
                                 Giao thành công</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Created at</th>
+                                Thời gian tạo</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Updated at</th>
+                                Thời gian cập nhật</th>
                             <th class="text-secondary text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             </th>
                         </tr>

@@ -390,7 +390,7 @@
                                     <span class="mr_lr">&nbsp;<i class="fa fa-angle-right"></i>&nbsp;</span>
                                 </li>
                                 @if (empty($name_search))
-                                    <li><strong><span> Tất cả sản phẩm</span></strong></li>
+                                    <li><strong><span> <a href="{{route('route-index')}}"> Tất cả sản phẩm </a></span></strong></li>
                                 @else
                                     <li><strong><span> Kết quả cho tìm kiếm: {{ $name_search }}</span></strong></li>
                                 @endif
@@ -518,7 +518,7 @@
                                                 </span>
                                                 <span style="margin-left:886px">
                                                     <div class="input-group mb-3">
-                                                        <form action="{{ route('route-index') }}" method="post">
+                                                        <!-- <form action="{{ route('route-index') }}" method="post">
                                                             @csrf
                                                             <select class="custom-select" id="inputGroupSelect01"
                                                                 class="form-control" style="width: 180px"
@@ -530,7 +530,7 @@
                                                                 <option value="name_desc">Tên Z-A</option>
                                                             </select>
                                                             <button type="submit">Sap xep</button>
-                                                        </form>
+                                                        </form> -->
                                                     </div>
                                                 </span>
                                             @else
@@ -638,8 +638,8 @@
                                                                 <div class="product-price-btn" style="margin-top: 25px">
                                                                     <a class="button" data-id="{{ $item->id }}">
                                                                         <button type="" onclick="myFunction()"
-                                                                            style="margin-top: -10px">buy
-                                                                            now</button>
+                                                                            style="margin-top: -10px">Mua ngay
+                                                                            </button>
                                                                     </a>
                                                                 </div>
                                                             @else
@@ -658,7 +658,7 @@
                                                                             value="{{ $item->price_new }}"
                                                                             name="price">
                                                                         <button type="submit"
-                                                                            style="margin-top: -10px">buy now</button>
+                                                                            style="margin-top: -10px">Mua ngay</button>
                                                                     </form>
                                                                 </div>
                                                             @endif
@@ -668,8 +668,8 @@
                                                                     style="margin-top: -25px">
                                                                     <a class="button" data-id="{{ $item->id }}">
                                                                         <button type="" onclick="myFunction()"
-                                                                            style="margin-top: -10px">buy
-                                                                            now</button>
+                                                                            style="margin-top: -10px">Mua
+                                                                            ngay</button>
                                                                     </a>
                                                                 </div>
                                                             @else
@@ -688,7 +688,7 @@
                                                                             value="{{ $item->price_new }}"
                                                                             name="price">
                                                                         <button type="submit"
-                                                                            style="margin-top: -10px">buy now</button>
+                                                                            style="margin-top: -10px">Mua ngay</button>
                                                                     </form>
                                                                 </div>
                                                             @endif

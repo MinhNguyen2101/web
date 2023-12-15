@@ -183,7 +183,7 @@ class Usercontroller extends Controller
         if ($status) {
             DB::commit();
 
-            $messages_update =  'Update User ' . $id . ' successfully!';
+            $messages_update =  'Cập nhật ' . $id . ' thành công!';
 
             Session::flash('message', $messages_update);
 

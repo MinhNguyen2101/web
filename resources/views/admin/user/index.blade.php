@@ -2,9 +2,9 @@
 @section('contents')
     <div style="padding:15px">
         <div style="display: flex">
-            <h1 style="flex: 1">User</h1>
+            <h1 style="flex: 1">Tài khoản</h1>
             <button type="button" class="btn bg-gradient-success btn_create_user" data-bs-toggle="modal"
-                data-bs-target="#modal-create">Create</button>
+                data-bs-target="#modal-create">Thêm</button>
         </div>
         @include('admin.user.create')
         @include('admin.user.update')
@@ -15,18 +15,18 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
                                 Email</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
-                                Role</th>
+                                Quyền</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Created at</th>
+                                Thời gian tạo</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Updated at</th>
+                                Thời gian cập nhật</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
@@ -46,7 +46,7 @@
                                 </td>
                                 <td class="align-middle text-center text-sm" style="width: 50%">
                                     @if ($user->role == 1)
-                                        <span class="badge badge-pill bg-gradient-primary">User</span>
+                                        <span class="badge badge-pill bg-gradient-primary">Khách hàng</span>
                                     @else
                                         <span class="badge badge-pill badge-md bg-gradient-warning">Admin</span>
                                     @endif
@@ -63,14 +63,14 @@
                                             data-bs-target="#modal-update" data-bs-toggle="modal"
                                             data-url="{{ route('admin.user.edit', $user->id) }}"> --}}
                                             <button type="button" disabled class="btn btn-secondary edit_user"
-                                                data-url="{{ route('admin.user.edit', $user->id) }}">Edit</button>
+                                                data-url="{{ route('admin.user.edit', $user->id) }}">Sửa</button>
                                         </a>
                                     @else
                                         <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
                                             data-bs-target="#modal-update" data-bs-toggle="modal"
                                             data-url="{{ route('admin.user.edit', $user->id) }}">
                                             <button type="button"  class="btn btn-secondary edit_user"
-                                                data-url="{{ route('admin.user.edit', $user->id) }}">Edit</button>
+                                                data-url="{{ route('admin.user.edit', $user->id) }}">Sửa</button>
                                         </a>
                                     @endif
 
@@ -78,7 +78,7 @@
                                         data-toggle="tooltip" data-original-title="Edit user">
                                         <button type="button" class="btn btn-danger button-delete"
                                             data-id="{{ $user->id }}"
-                                            data-url="{{ route('admin.user.destroy', $user->id) }}">Delete</button>
+                                            data-url="{{ route('admin.user.destroy', $user->id) }}">Xóa</button>
                                     </a> --}}
                                 </td>
                             </tr>

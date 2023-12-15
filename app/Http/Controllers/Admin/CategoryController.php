@@ -39,8 +39,12 @@ class CategoryController extends Controller
         return DataTables::of(Category::query   ())
         ->addColumn('delete', function ($category) {
             return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">
-                        <button type="button" class="btn btn-danger button-delete" data-id="' . $category->id . '" data-url="' . route('admin.category.destroy', $category->id) . '">Delete</button>
+                        <button type="button" class="btn btn-danger button-delete" data-id="' . $category->id . '" data-url="' . route('admin.category.destroy', $category->id) . '">Xóa</button>
                     </a>';
+            })
+        ->addColumn('update', function ($category) {
+                // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
+                return $category->updated_at->format('Y-m-d H:i:s');
             })
         ->make(true);
 
@@ -187,7 +191,7 @@ class CategoryController extends Controller
         if ($status) {
             DB::commit();
 
-            $messages_update =  'Update category '.$id.' successfully!';
+            $messages_update =  'Cập nhật danh mục '.$id.' thành công!';
 
             Session::flash('message', $messages_update);
 
@@ -217,11 +221,11 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $count_product = Product::where('category_id', $id)->count();
         if ($count_product >= 1) {
-            $messages_delete =  'Delete Category ' . $id . ' fails. Because have product use category ';
+            $messages_delete =  'Xóa danh mục ' . $id . ' thất bại. Bởi vì sản phẩm sử dụng danh mục ';
             Session::flash('error', $messages_delete);
         } else {
             $check = Category::find($id)->delete();
-            $messages_delete =  'Delete Category ' . $id . ' successfully';
+            $messages_delete =  'Xóa danh mục ' . $id . ' thành công';
 
             Session::flash('message', $messages_delete);
             if (!$check) {

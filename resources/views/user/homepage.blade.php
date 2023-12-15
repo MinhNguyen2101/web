@@ -585,8 +585,7 @@
                                                 @if (empty(Auth::user()->id))
                                                     <div class="product-price-btn" style="margin-top: 25px">
                                                         <a class="button" data-id="{{ $item->id }}">
-                                                            <button type="" onclick="myFunction()">buy
-                                                                now</button>
+                                                            <button type="" onclick="myFunction()">Mua ngay</button>
                                                         </a>
                                                     </div>
                                                 @else
@@ -597,7 +596,7 @@
                                                                 name="user_id">
                                                             <input type="hidden" value="{{ $item->id }}"
                                                                 name="product_id">
-                                                            <button type="submit">buy now</button>
+                                                            <button type="submit">Mua ngay</button>
                                                         </form>
                                                     </div>
                                                 @endif
@@ -606,8 +605,7 @@
                                                     <div class="product-price-btn" style="margin-top: -25px">
                                                         <div class="product-price-btn" style="margin-top: -25px">
                                                             <a class="button" data-id="{{ $item->id }}">
-                                                                <button type="" onclick="myFunction()">buy
-                                                                    now</button>
+                                                                <button type="" onclick="myFunction()">Mua ngay</button>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -619,7 +617,7 @@
                                                                 name="user_id">
                                                             <input type="hidden" value="{{ $item->id }}"
                                                                 name="product_id">
-                                                            <button type="submit">buy now</button>
+                                                            <button type="submit">Mua ngay</button>
                                                         </form>
                                                     </div>
                                                 @endif

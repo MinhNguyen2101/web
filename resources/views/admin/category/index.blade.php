@@ -19,11 +19,11 @@
     </style>
     <div style="padding:15px">
         <div style="display: flex">
-            <h1 style="flex: 1">Category</h1>
+            <h1 style="flex: 1">Danh mục</h1>
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             </div>
             <button type="button" class="btn bg-gradient-success btn_create_category" data-bs-toggle="modal"
-                data-bs-target="#modal-create">Create</button>
+                data-bs-target="#modal-create">Thêm</button>
         </div>
         @include('admin.category.create')
         @include('admin.category.update')
@@ -34,17 +34,17 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
-                                Description</th>
+                                Mô tả</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Created at</th>
+                                Thời gian tạo</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Updated at</th>
-                            <th>Update</th>
-                            <th class="text-secondary opacity-7">delete</th>
+                                Thời gian cập nhật</th>
+                            <th>Cập nhật</th>
+                            <th class="text-secondary opacity-7">Xóa</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -87,7 +87,7 @@
                                     'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
                                     'data-url="' + editRoute + '">' +
                                     '<button type="button" class="btn btn-secondary edit_category" ' +
-                                    'data-url="' + editRoute + '">Edit</button>' +
+                                    'data-url="' + editRoute + '">Sửa</button>' +
                                     '</a>';
                             }
 
@@ -100,7 +100,7 @@
 
                                 return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' +
                                     '<button type="button" class="btn btn-danger button-delete" data-id="' +
-                                    row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
+                                    row.id + '" data-url="' + deleteRoute + '">Xóa</button>' +
                                     '</a>';
                             }
 
@@ -210,13 +210,13 @@
                 var id = $(this).data('id');
                 console.log(url);
                 Swal.fire({
-                        title: "Are you sure?",
+                        title: "Bạn chắc chắn không?",
                         // text: "{{ __('messages.once_delete') }}",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: "Yes,delete it!"
+                        confirmButtonText: "Đồng ý"
                     })
                     .then((result) => {
                         if (result.isConfirmed) {

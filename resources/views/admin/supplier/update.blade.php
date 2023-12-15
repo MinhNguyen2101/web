@@ -5,7 +5,7 @@
             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title font-weight-normal" id="modal-title-default">UPDATE SUPPLIER</h6>
+                        <h6 class="modal-title font-weight-normal" id="modal-title-default">Cập nhật nhà cung cấp</h6>
                         <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -15,7 +15,7 @@
                             @csrf
                             @method('put')
                             <div class="input-group input-group-static mb-4">
-                                <label>Name <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Tên<i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="text" class="form-control value_input name" name="name" >
                                 <span class="invalid-object" role="alert">
                                     <strong class="name_error error" style="color: red"></strong>
@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Telephone <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Số điện thoại <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="number" class="form-control value_input telephone" name="telephone">
                                 <span class="invalid-object" role="alert">
                                     <strong class="telephone_error error" style="color: red"></strong>
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Address <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Số điện thoại <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="text" class="form-control value_input address" name="address">
                                 <span class="invalid-object" role="alert">
                                     <strong class="address_error error" style="color: red"></strong>
@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Description</label>
+                                <label>Mô tả</label>
                                 <textarea type="text" class="form-control value_input description" name="description"> </textarea>
                                 <span class="invalid-object" role="alert">
                                     <strong class="description_error error"></strong>
@@ -56,8 +56,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bg-gradient-primary btn-update">Update</button>
-                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn bg-gradient-primary btn-update">Cập nhật</button>
+                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </div>
             </div>

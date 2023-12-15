@@ -5,7 +5,7 @@
             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title font-weight-normal" id="modal-title-default">CREATE SUPPLIER</h6>
+                        <h6 class="modal-title font-weight-normal" id="modal-title-default">Thêm nhà cung cấp</h6>
                         <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -14,7 +14,7 @@
                         <form action="{{ route('admin.supplier.store') }}" method="POST" class="form_create">
                             @csrf
                             <div class="input-group input-group-static mb-4">
-                                <label>Name <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Tên<i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="text" class="form-control value_input" name="name">
                                 <span class="invalid-object" role="alert">
                                     <strong class="name_error error" style="color: red"></strong>
@@ -22,7 +22,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Email <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Email<i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="email" class="form-control value_input" name="email">
                                 <span class="invalid-object" role="alert">
                                     <strong class="email_error error" style="color: red"></strong>
@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Telephone <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Số điện thoại<i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="number" class="form-control value_input" name="telephone">
                                 <span class="invalid-object" role="alert">
                                     <strong class="telephone_error error" style="color: red"></strong>
@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Address <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
+                                <label>Địa chỉ <i class="fa-solid fa-asterisk" style="color: red"></i> </label>
                                 <input type="text" class="form-control value_input" name="address">
                                 <span class="invalid-object" role="alert">
                                     <strong class="address_error error" style="color: red"></strong>
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Description</label>
+                                <label>Mô tả</label>
                                 <textarea type="text" class="form-control value_input" name="description"> </textarea>
                                 <span class="invalid-object" role="alert">
                                     <strong class="description_error error"></strong>
@@ -56,8 +56,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-primary btn-save"
-                            data-url="{{ route('admin.category.store') }}">Create</button>
-                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                            data-url="{{ route('admin.category.store') }}">Thêm</button>
+                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </div>
             </div>

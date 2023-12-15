@@ -39,8 +39,12 @@ class SupplierController extends Controller
         return DataTables::of(Supplier::query   ())
         ->addColumn('delete', function ($supplier) {
             return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">
-                        <button type="button" class="btn btn-danger button-delete" data-id="' . $supplier->id . '" data-url="' . route('admin.supplier.destroy', $supplier->id) . '">Delete</button>
+                        <button type="button" class="btn btn-danger button-delete" data-id="' . $supplier->id . '" data-url="' . route('admin.supplier.destroy', $supplier->id) . '">Xóa</button>
                     </a>';
+            })
+            ->addColumn('update', function ($supplier) {
+                // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
+                return $supplier->updated_at->format('Y-m-d H:i:s');
             })
         ->make(true);
 
@@ -224,7 +228,7 @@ class SupplierController extends Controller
         if ($status) {
             DB::commit();
 
-            $messages_update =  'Update Supplier ' . $id . ' successfully!';
+            $messages_update =  'Cập nhật nhà cung cấp ' . $id . ' thành công!';
 
             Session::flash('message', $messages_update);
 
@@ -255,11 +259,11 @@ class SupplierController extends Controller
         $supplier = Supplier::find($id);
         $count_product = Product::where('supplier_id', $id)->count();
         if ($count_product >= 1) {
-            $messages_delete =  'Delete Supplier ' . $id . ' fails. Because have product use category ';
+            $messages_delete =  'Xóa nhà cung cấp ' . $id . ' thất bại. ';
             Session::flash('error', $messages_delete);
         } else {
             $check = Supplier::find($id)->delete();
-            $messages_delete =  'Delete Supplier ' . $id . ' successfully';
+            $messages_delete =  'Xóa nhà cung cấp ' . $id . ' thành công';
 
             Session::flash('message', $messages_delete);
             if (!$check) {

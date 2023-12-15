@@ -13,9 +13,9 @@
     </style>
     <div style="padding:15px">
         <div style="display: flex">
-            <h1 style="flex: 1">Suppliers</h1>
+            <h1 style="flex: 1">Nhà cung cấp</h1>
             <button type="button" class="btn bg-gradient-success btn_create" data-bs-toggle="modal"
-                data-bs-target="#modal-create">Create</button>
+                data-bs-target="#modal-create">Thêm</button>
         </div>
         @include('admin.supplier.create')
         @include('admin.supplier.update')
@@ -26,19 +26,19 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email
                             </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Telephone
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số điện thoại
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
-                                Description</th>
+                                Mô tả</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Created at</th>
+                                Thời gian tạo</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Updated at</th>
+                                Thời gian cập nhật</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
