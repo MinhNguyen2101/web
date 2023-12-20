@@ -50,10 +50,14 @@ class ProductController extends Controller
             ->addColumn('supplier', function ($product) {
                 return $product->supplier->name;
             })
-            ->addColumn('update', function ($product) {
+            ->addColumn('updated_at', function ($product) {
                 // Tùy chỉnh để trả về dữ liệu tìm kiếm cho trường "update"
-                return $product->updated_at->format('Y-m-d H:i:s');
+                return $product->updated_at->format('d/m/Y');
             })
+            ->addColumn('created_at',function($product){
+                return $product->created_at->format('d/m/Y');
+            }) 
+            
             ->make(true);
     }
 

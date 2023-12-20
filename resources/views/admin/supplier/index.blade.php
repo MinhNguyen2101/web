@@ -10,6 +10,12 @@
         .page-link{
             width: 75px!important;
         }
+        #table_supplier_filter .form-control {
+            font-size: 18px;
+            border: 1px solid;
+            margin: 10px;
+            border-radius: 15px
+        }
     </style>
     <div style="padding:15px">
         <div style="display: flex">
@@ -35,10 +41,13 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                 style="width: 100px">
                                 Mô tả</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Thời gian tạo</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Thời gian cập nhật</th>
+                                Thời gian cập nhật</th> -->
+                            <!-- <th class="text-secondary opacity-7"></th> -->
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Hành động</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
@@ -83,7 +92,7 @@
                                     'data-bs-target="#modal-update" data-bs-toggle="modal" ' +
                                     'data-url="' + editRoute + '">' +
                                     '<button type="button" class="btn btn-secondary edit_supplier" ' +
-                                    'data-url="' + editRoute + '">Edit</button>' +
+                                    'data-url="' + editRoute + '">Sửa</button>' +
                                     '</a>';
                             }
 
@@ -96,7 +105,7 @@
 
                                 return '<a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete category">' +
                                     '<button type="button" class="btn btn-danger button-delete" data-id="' +
-                                    row.id + '" data-url="' + deleteRoute + '">Delete</button>' +
+                                    row.id + '" data-url="' + deleteRoute + '">Xóa</button>' +
                                     '</a>';
                             }
 

@@ -21,10 +21,8 @@ class Product extends Model
         'status'
     ];
 
-    protected $cast = [
-        'created_at' => 'd/m/yyyy',
-        'updated_at' => 'd/m/yyyy',
-    ];
+    
+    
 
     public function category()
     {

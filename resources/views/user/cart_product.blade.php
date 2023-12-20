@@ -455,10 +455,11 @@
                 confirmButtonText: 'Đồng ý'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let form = $('form.delete_product');
+                    let form = $(this).closest('form.delete_product');
                     let url = form.attr('action');
-                    var formData = new FormData(document.getElementById("delete_product"));
-                    console.log(form);
+                    let data_id = $(this).data('id');
+                    var formData = new FormData(form[0]);
+                    formData.append("cart_id", data_id);
                     $.ajax({
                         url: `${url}`,
                         type: "POST",

@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link id="pagestyle" href="{{ asset('assets/css/material-dashboard.css?v=3.0.2') }}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <title>HomePage</title>
 </head>
 
@@ -506,7 +519,7 @@
                             <h2 class="title-base" title="Sản phẩm mới">
                                 <a href="san-pham-moi" class="headline">Sản phẩm bán chạy</a>
                             </h2>
-                            <a href="san-pham-moi" class="btn btn-primary btn-shop-now">Xem thêm</a>
+                            <!-- <a href="san-pham-moi" class="btn btn-primary btn-shop-now">Xem thêm</a> -->
                         </div>
                     </div>
                 </div>
@@ -645,7 +658,7 @@
                             <h2 class="title-base" title="Sản phẩm mới">
                                 <a href="san-pham-moi" class="headline">Sản phẩm giảm giá</a>
                             </h2>
-                            <a href="san-pham-moi" class="btn btn-primary btn-shop-now">Xem thêm</a>
+                            <!-- <a href="san-pham-moi" class="btn btn-primary btn-shop-now">Xem thêm</a> -->
                         </div>
                     </div>
                 </div>
@@ -787,7 +800,7 @@
                             <h2 class="title-base" title="Sản phẩm mới">
                                 <a href="san-pham-moi" class="headline">Sản phẩm mới</a>
                             </h2>
-                            <a href="san-pham-moi" class="btn btn-primary btn-shop-now">Xem thêm</a>
+                            <!-- <a href="san-pham-moi" class="btn btn-primary btn-shop-now">Xem thêm</a> -->
                         </div>
                     </div>
                 </div>
@@ -973,6 +986,23 @@
                 confirmButtonText: "OK"
             });
         }
+    </script>
+    <script>
+        @if (Session::has('message'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.success("{{ session('message') }}");
+            @endif
+
+            @if (Session::has('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.error("{{ session('error') }}");
+            @endif
     </script>
 
 </body>

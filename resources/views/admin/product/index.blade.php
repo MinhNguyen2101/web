@@ -200,7 +200,18 @@
                             "data": "category"
                         },
                         {
-                            "data": "status"
+                            "data": "status",
+                            "render": function(data, type, row) {
+                                var route = "{{ route('admin.changeStatus') }}";
+                                return '<label class="switch">' +
+                                    '<input data-id="' + row.id + '" class="toggle-class" type="checkbox" ' +
+                                    'data-onstyle="success" data-offstyle="danger" data-toggle="toggle" ' +
+                                    'data-on="Active" data-off="InActive" ' +
+                                    'data-url="' + route + '" ' +
+                                    (row.status == 1 ? 'checked' : '') + '>' +
+                                    '<span class="slider round"></span>' +
+                                    '</label>';
+                            }
                         },
                         {
                             "data": "created_at"
@@ -233,19 +244,20 @@
 
 
             $(function() {
-                $('.toggle-class').change(function() {
-                    var status = $(this).prop('checked') == true ? 1 : 0;
-                    var product_id = $(this).data('id');
-                    let url = $(this).data('url');
-                    $.ajax({
-                        type: "GET",
-                        dataType: "json",
-                        url: `${url}`,
-                        data: {
-                            'status': status,
-                            'product_id': product_id
-                        },
-                        success: function(data) {
+                $(document).on('change', '.toggle-class', function() {
+                var status = $(this).prop('checked') == true ? 1 : 0;
+                var product_id = $(this).data('id');
+                var url = $(this).data('url');
+                
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: url,
+                    data: {
+                        'status': status,
+                        'product_id': product_id
+                    },
+                    success: function(data) {
                             window.location.href = "{{ route('admin.product.index') }}";
                         }
                     });

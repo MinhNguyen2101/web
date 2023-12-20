@@ -152,7 +152,7 @@
                             editRoute = editRoute.replace(':id', row.id);
 
                             return '<a href="' + editRoute + '">' +
-                                '<button type="button" class="btn btn-info">Info</button>' +
+                                '<button type="button" class="btn btn-info">Thông tin đơn hàng</button>' +
                                 '</a>'
                         }
                     }

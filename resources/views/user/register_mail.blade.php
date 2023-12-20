@@ -8,10 +8,10 @@
 </head>
 <body>
     <h3 style = "text-align: center">Đăng ký tài khoản thành công</h3>
-    <p>Xin chào, {{$user->name}}</p>
-    <p>Chúc mừng bạn đăng ký tài khoản thành công với hệ thống của chúng tôi với tài khoản</p>
-    <p> User name: {{$user->email}}</p> <br>
-    <p>Password : {{$user->password}}</p> <br>
-    <p>Chúc bạn sẽ tìm được nhưng sản phẩm ưng ý</p>
+        <p>Xin chào,  {{ $user['name'] }}</p>
+        <p>Chúc mừng bạn đăng ký tài khoản thành công với hệ thống của chúng tôi với tài khoản</p>
+        <p> User name: {{$user['name']}}</p> <br>
+        <p>Password : {{$user['password']}}</p> <br>
+        <p>Chúc bạn sẽ tìm được nhưng sản phẩm ưng ý</p>
 </body>
 </html>

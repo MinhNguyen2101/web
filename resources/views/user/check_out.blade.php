@@ -66,7 +66,7 @@
                 </div>
                 <div style="width: 320px">
                     <h3 class="mb-0 ">Địa chỉ nhận hàng</h3>
-                    <input type="text" style="font-size: 15px;width: 100%" class="form-control" name="address">
+                    <input type="text" style="font-size: 15px;width: 100%; border:1px solid" class="form-control" name="address">
                     @error('address')
                         <p style="font-size:13px; color:red ">{{ $message }}</p>
                     @enderror

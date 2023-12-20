@@ -73,13 +73,21 @@
                                                 data-url="{{ route('admin.user.edit', $user->id) }}">Sửa</button>
                                         </a>
                                     @endif
-
-                                    {{-- <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit user">
-                                        <button type="button" class="btn btn-danger button-delete"
-                                            data-id="{{ $user->id }}"
-                                            data-url="{{ route('admin.user.destroy', $user->id) }}">Xóa</button>
-                                    </a> --}}
+                                    @if (Auth::user()->id == $user->id)
+                                        <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            <button disabled type="button" class="btn btn-danger button-delete"
+                                                data-id="{{ $user->id }}"
+                                                data-url="{{ route('admin.user.destroy', $user->id) }}">Xóa</button>
+                                        </a>
+                                    @else 
+                                        <a href="javascript:;" class="text-secondary font-weight-normal text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit user">
+                                            <button type="button" class="btn btn-danger button-delete"
+                                                data-id="{{ $user->id }}"
+                                                data-url="{{ route('admin.user.destroy', $user->id) }}">Xóa</button>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -187,42 +195,42 @@
             });
 
             // // DELETE
-            // $(document).on('click', '.button-delete', function(e) {
-            //     e.preventDefault();
-            //     let url = $(this).data('url');
-            //     var id = $(this).data('id');
-            //     console.log(url);
-            //     Swal.fire({
-            //             title: "Are you sure?",
-            //             // text: "{{ __('messages.once_delete') }}",
-            //             icon: 'warning',
-            //             showCancelButton: true,
-            //             confirmButtonColor: '#3085d6',
-            //             cancelButtonColor: '#d33',
-            //             confirmButtonText: "Yes,delete it!"
-            //         })
-            //         .then((result) => {
-            //             if (result.isConfirmed) {
-            //                 $.ajax({
-            //                     url: url,
+            $(document).on('click', '.button-delete', function(e) {
+                e.preventDefault();
+                let url = $(this).data('url');
+                var id = $(this).data('id');
+                console.log(url);
+                Swal.fire({
+                        title: "Are you sure?",
+                        // text: "{{ __('messages.once_delete') }}",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: "Yes,delete it!"
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
 
-            //                     type: 'post',
-            //                     headers: {
-            //                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //                     },
-            //                     data: {
-            //                         "_token": "{{ csrf_token() }}",
-            //                         _method: "DELETE",
-            //                         'id': id
-            //                     },
-            //                     cache: false,
-            //                     success: function(data) {
-            //                         window.location.reload();
-            //                     },
-            //                 });
-            //             }
-            //         });
-            // });
+                                type: 'post',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                    _method: "DELETE",
+                                    'id': id
+                                },
+                                cache: false,
+                                success: function(data) {
+                                    window.location.reload();
+                                },
+                            });
+                        }
+                    });
+            });
         </script>
     @endpush
 @endsection

@@ -23,6 +23,7 @@ class HomepageController extends Controller
     {
         $name_search = $request->search;
         $product = Product::query();
+        $category = Category::limit(3)->get();
         if(!empty($request->sort)){
             if($request->sort == 'price_asc')
             {
@@ -41,6 +42,6 @@ class HomepageController extends Controller
         }
         $products = $product->where('name', 'like', '%' . $request->search . '%')->paginate(8);
 
-        return view('user.product', compact('products','name_search'));
+        return view('user.product', compact('products','name_search','category'));
     }
 }

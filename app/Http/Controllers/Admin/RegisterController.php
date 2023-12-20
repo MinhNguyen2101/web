@@ -40,7 +40,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
             'role' => User::ROLE_USER,
         ]);
-        Mail::to($user->email)->send( new RegisterMail($dataInfo));
+        // Mail::to($user->email)->send( new RegisterMail($dataInfo));
         return redirect(route('login'))->with('message', 'Dang ky tai khoan thanh cong');
     }
 }

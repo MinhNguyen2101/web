@@ -98,6 +98,11 @@ class ProductController extends Controller
 
     public function addToCard(Request $request)
     {
+        $product = Product::find($request->product_id);
+        if($product->quantity == 0) {
+            return redirect()->route('trang-chu')->with('error', 'Sản phẩm hiện đang hết hàng ');
+        }
+
         if ($request->quantity) {
             $quantity = $request->quantity;
         } else {
@@ -115,7 +120,7 @@ class ProductController extends Controller
             $cart = CartProduct::create([
                 'user_id' => $request->user_id,
                 'product_id' => $request->product_id,
-                'price' => $request->price,
+                'price' => $product->price_new ? $product->price_new : $product->price_old,
                 'quantity' => $quantity,
             ]);
         }

@@ -119,7 +119,7 @@
     @push('page_script')
         <script>
             $(function() {
-                $('.toggle-class').change(function() {
+                $(document).on('change', '.toggle-class', function() {
                     var status = $(this).prop('checked') == true ? 3 : 2;
                     var order_id = $(this).data('id');
                     let url = $(this).data('url');
@@ -159,6 +159,20 @@
                             "data": "status"
                         },
                         {
+                            "data": "changeStatus",
+                            "render": function (data, type, row) {
+                                var route = "{{ route('admin.changeStatusOrder') }}";
+                                return '<label class="switch">' +
+                                    '<input data-id="' + row.id + '" class="toggle-class" type="checkbox" ' +
+                                    'data-onstyle="success" data-offstyle="danger" data-toggle="toggle" ' +
+                                    'data-on="Active" data-off="InActive" ' +
+                                    'data-url="' + route + '" ' +
+                                    (row.status == 2 ? 'checked' : '') + '>' +
+                                    '<span class="slider round"></span>' +
+                                    '</label>';
+                            }
+                        },
+                        {
                             "data": "created_at"
                         },
                         {
@@ -171,7 +185,7 @@
                                 editRoute = editRoute.replace(':id', row.id);
 
                                 return '<a href="' + editRoute + '">' +
-                                    '<button type="button" class="btn btn-info">Info</button>' +
+                                    '<button type="button" class="btn btn-info">Thông tin đơn hàng</button>' +
                                     '</a>'
                             }
                         }

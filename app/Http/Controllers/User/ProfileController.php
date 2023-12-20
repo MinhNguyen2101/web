@@ -102,10 +102,9 @@ class ProfileController extends Controller
     public function checkout()
     {
         $productCarts = CartProduct::where('user_id', auth()->user()->id)->get();
+        $category = Category::limit(3)->get();
 
-
-
-        return view('user.check_out', compact('productCarts'));
+        return view('user.check_out', compact('productCarts',"category"));
     }
 
     public function loadQuan(Request $request)

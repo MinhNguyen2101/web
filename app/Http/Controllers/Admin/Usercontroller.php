@@ -211,5 +211,12 @@ class Usercontroller extends Controller
     public function destroy($id)
     {
         //
+        $user = User::find($id);
+        $user->delete();
+
+        return json_encode(array(
+            "statusCode" => Response::HTTP_UNPROCESSABLE_ENTITY,
+            "message" => __('messages.updated_success')
+        ), JSON_THROW_ON_ERROR); 
     }
 }
