@@ -190,11 +190,12 @@
                         {
                             "data": "quantity"
                         },
-                        {
-                            "data": "price_old"
-                        },
+                        
                         {
                             "data": "price_new"
+                        },
+                        {
+                            "data": "price_old"
                         },
                         {
                             "data": "category"
@@ -221,7 +222,6 @@
                         },
 
                         {
-                            "data": "update",
                             "render": function(data, type, row) {
                                 var editRoute = "{{ route('admin.product.edit', ':id') }}";
                                 editRoute = editRoute.replace(':id', row.id);

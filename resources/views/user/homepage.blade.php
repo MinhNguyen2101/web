@@ -530,7 +530,7 @@
                                 <div class="product-box-h" style="border: 2px solid #ff9897 ">
                                     <div class="product-thumbnail">
                                         <a class="height_name text2line"
-                                            href="{{ route('product_user.show', $item->id) }}">
+                                                href="{{ route('product_user.show', $item->id) }}">
                                             <img class="lazyload loaded"
                                                 src="{{ asset('storage') }}/{{ $item->image }}"
                                                 style="width: 100%;height:254px;">
@@ -669,7 +669,7 @@
                                 <div class="product_border">
                                     <div class="product-box-h" style="border: 2px solid #ff9897 ">
                                         <div class="product-thumbnail">
-                                            <a class="height_name text2line" href="">
+                                            <a class="height_name text2line" href="{{ route('product.show', $item->id) }} ">
                                                 <img class="lazyload loaded"
                                                     src="{{ asset('storage') }}/{{ $item->image }}"
                                                     style="width: 100%;height:254px;">
@@ -810,7 +810,7 @@
                             <div class="product_border">
                                 <div class="product-box-h" style="border: 2px solid #ff9897 ">
                                     <div class="product-thumbnail">
-                                        <a class="height_name text2line" href="">
+                                        <a class="height_name text2line" href="{{ route('product.show', $item->id) }}">
                                             <img class="lazyload loaded"
                                                 src="{{ asset('storage') }}/{{ $item->image }}"
                                                 style="width: 100%;height:254px;">

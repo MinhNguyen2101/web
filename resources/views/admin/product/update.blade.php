@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="input-group input-group-static mb-4">
-                                <label>Price Old </label>
+                                <label>Giá cũ </label>
                                 <input type="text" class="form-control value_input price_old" name="price_old">
                                 <span class="invalid-object" role="alert">
                                     <strong class="price_old_error error" style="color: red"></strong>
